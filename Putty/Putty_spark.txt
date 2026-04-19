@@ -1,0 +1,61 @@
+Using username "maria_dev".
+maria_dev@127.0.0.1's password:
+Last login: Sun Apr 19 02:58:43 2026 from 172.18.0.3
+[maria_dev@sandbox-hdp ~]$ su root
+Password:
+[root@sandbox-hdp maria_dev]# exit
+[maria_dev@sandbox-hdp ~]$ su root
+Password:
+[root@sandbox-hdp maria_dev]#
+
+------this is to change ambari spark settings-------------
+[root@sandbox-hdp maria_dev]# ambari-admin-password-reset
+Please set the password for admin: maria_dev
+Please retype the password for admin: maria_dev
+
+relogin to ambari
+username: admin
+password: maria_dev
+---------------------------------------------------------
+
+[maria_dev@sandbox-hdp muzaffar]$ vi yourScript.py
+[maria_dev@sandbox-hdp muzaffar]$ ls
+student_details_1.csv  trial02.txt  trial.pig
+trial01.txt            trial03.txt  yourScript.py
+[maria_dev@sandbox-hdp muzaffar]$ spark-submit yourScript.py
+SPARK_MAJOR_VERSION is set to 2, using Spark2
+('Squared RDD Result:', [1, 4, 9, 16])
+[maria_dev@sandbox-hdp muzaffar]$
+
+
+[maria_dev@sandbox-hdp muzaffar]$ vi mllib.py
+[maria_dev@sandbox-hdp muzaffar]$ spark-submit mllib.py
+SPARK_MAJOR_VERSION is set to 2, using Spark2
+
+Ratings for user ID 0:
+Star Wars (1977) 5.0
+Empire Strikes Back, The (1980) 5.0
+Gone with the Wind (1939) 1.0
+
+Top 20 recommendation:
+(u'Wrong Trousers, The (1993)', 5.749821662902832)
+(u'Fifth Element, The (1997)', 5.232528209686279)
+(u'Close Shave, A (1995)', 5.050625324249268)
+(u'Monty Python and the Holy Grail (1974)', 4.99659538269043)
+(u'Star Wars (1977)', 4.98954963684082)
+(u'Army of Darkness (1993)', 4.980320930480957)
+(u'Empire Strikes Back, The (1980)', 4.972929954528809)
+(u'Princess Bride, The (1987)', 4.957705497741699)
+(u'Blade Runner (1982)', 4.910674571990967)
+(u'Return of the Jedi (1983)', 4.77808141708374)
+(u'Rumble in the Bronx (1995)', 4.69175910949707)
+(u'Raiders of the Lost Ark (1981)', 4.636718273162842)
+(u"Jackie Chan's First Strike (1996)", 4.632108211517334)
+(u'Twelve Monkeys (1995)', 4.614840507507324)
+(u'Spawn (1997)', 4.57417106628418)
+(u'Terminator, The (1984)', 4.561151027679443)
+(u'Alien (1979)', 4.54151725769043)
+(u'Terminator 2: Judgment Day (1991)', 4.529487133026123)
+(u'Usual Suspects, The (1995)', 4.517911911010742)
+(u'Mystery Science Theater 3000: The Movie (1996)', 4.5095906257629395)
+[maria_dev@sandbox-hdp muzaffar]$
