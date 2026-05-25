@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix Commands Comprehensive Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --subtitle-color: #475569;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .portal-container {
+            max-width: 600px; /* Reduced container max-width to look elegant as a single vertical feed */
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--subtitle-color);
+            margin: 0 auto;
+        }
+
+        /* CHANGED: Forces child cards to stack vertically down the page */
+        .quiz-grid {
+            display: flex;
+            flex-direction: column; 
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* CHANGED: Cards now expand to take 100% of the container width safely */
+        .quiz-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            width: 100%; 
+            box-sizing: border-box; /* Ensures padding doesn't break layout limits on small screens */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        .quiz-badge {
+            display: inline-block;
+            align-self: flex-start;
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .quiz-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: var(--text-color);
+        }
+
+        .quiz-description {
+            color: var(--subtitle-color);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .launch-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: background-color 0.15s ease;
+        }
+
+        .launch-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .quiz-card.placeholder {
+            border-style: dashed;
+            background: transparent;
+            box-shadow: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0.6;
+            padding: 30px;
+        }
+
+        .placeholder-text {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unix Commands Practice Test</h1>
+        <p class="subtitle">30 questions based on Dr Bernard's Unix command notes. Preparation for May 31st Test</p>
+        
+        <div id="scoreBanner" class="score-banner"></div>
+        <div id="quizContainer"></div>
+        
+        <button class="action-btn" id="submitBtn" onclick="gradeQuiz()">Submit Quiz & Calculate Score</button>
+    </div>
+
+    <script>
+        const quizData = {"questions": [{"questionNumber": 1, "question": "Which of the following commands should be used to display the exact full absolute path of your current working directory?", "answerOptions": [{"text": "pwd", "rationale": "The pwd (print working directory) command outputs the complete absolute path from the root directory to the current folder.", "isCorrect": true}, {"text": "cd", "rationale": "The cd command without arguments redirects the user to their home directory rather than printing the current path.", "isCorrect": false}, {"text": "ls -l", "rationale": "This command displays a long list of details about files in the directory but does not print the path of the directory itself.", "isCorrect": false}, {"text": "history", "rationale": "The history command outputs a chronological list of previously executed commands instead of location details.", "isCorrect": false}]}, {"questionNumber": 2, "question": "If you are currently inside a subfolder and want to navigate exactly one level up into the parent directory, which command should you execute?", "answerOptions": [{"text": "cd .", "rationale": "A single dot represents the current directory, meaning this command will not change your location.", "isCorrect": false}, {"text": "cd ..", "rationale": "In Unix relative paths, two dots represent the immediate parent directory.", "isCorrect": true}, {"text": "cd /", "rationale": "A single forward slash targets the root directory of the entire system, not the immediate parent.", "isCorrect": false}, {"text": "rmdir ..", "rationale": "This is a removal command and will fail or cause an error rather than navigating the file system.", "isCorrect": false}]}, {"questionNumber": 3, "question": "Which flag should be added to the 'ls' command to ensure that hidden files (those starting with a dot) are included in the output?", "answerOptions": [{"text": "-l", "rationale": "The -l flag triggers a long-listing format detailing attributes, but it still omits hidden entries.", "isCorrect": false}, {"text": "-r", "rationale": "The -r flag is typically used for recursive actions in file management or reversing sorting orders.", "isCorrect": false}, {"text": "-a", "rationale": "The -a flag stands for 'all' and instructs the command to display hidden configuration files alongside regular files.", "isCorrect": true}, {"text": "-h", "rationale": "The -h flag makes file sizes human-readable when combined with other listing switches.", "isCorrect": false}]}, {"questionNumber": 4, "question": "You attempt to delete a folder using 'rmdir data_folder' but receive an error. What is the most likely reason for this failure?", "answerOptions": [{"text": "The folder contains files or subdirectories.", "rationale": "The rmdir command is strictly designed to safely remove completely empty directories.", "isCorrect": true}, {"text": "The folder is a hidden folder.", "rationale": "Hidden folders can be removed by rmdir as long as they are empty and targeted correctly.", "isCorrect": false}, {"text": "You typed the command in lowercase format.", "rationale": "Unix commands are case-sensitive and rmdir must be written in lowercase format to execute.", "isCorrect": false}, {"text": "The folder name contains an underscore character.", "rationale": "Underscores are perfectly valid characters in Unix file systems and do not block standard directory utilities.", "isCorrect": false}]}, {"questionNumber": 5, "question": "Which command allows you to aggressively delete a folder along with all of its underlying contents permanently?", "answerOptions": [{"text": "rm file", "rationale": "This syntax targets single files and will throw an error if pointing to a directory.", "isCorrect": false}, {"text": "rmdir folder", "rationale": "This will throw an error if the folder houses any files or sub-items.", "isCorrect": false}, {"text": "rm -r folder", "rationale": "The -r switch stands for recursive, causing the system to traverse and delete all nested files and folders.", "isCorrect": true}, {"text": "mv folder /dev/null", "rationale": "Moving a folder to a device file is syntactically invalid for deleting directory structures.", "isCorrect": false}]}, {"questionNumber": 6, "question": "What is the primary operational difference between the command 'cat file.txt' and 'less file.txt'?", "answerOptions": [{"text": "cat allows editing while less is read-only.", "rationale": "Neither tool allows editing; both are built purely for viewing data.", "isCorrect": false}, {"text": "cat dumps the entire file contents into the terminal screen at once, while less provides a scrollable interface.", "rationale": "Cat outputs everything immediately, making it tough for large logs, whereas less handles pagination and scrolling interactive windows.", "isCorrect": true}, {"text": "less can only open files containing fewer than 10 lines of information.", "rationale": "Less is optimized specifically to view massive files effectively without overloading system memories.", "isCorrect": false}, {"text": "cat automatically compresses the target file upon closure.", "rationale": "Cat stands for concatenate and has no functionality tied to archival compression engines.", "isCorrect": false}]}, {"questionNumber": 7, "question": "By default, how many lines from the beginning of a document will be displayed when running the command 'head document.txt'?", "answerOptions": [{"text": "5", "rationale": "Five lines is less than the standard default line count assigned to this utility.", "isCorrect": false}, {"text": "10", "rationale": "The standard default configuration for the head utility outputs exactly the first ten lines.", "isCorrect": true}, {"text": "20", "rationale": "While you can request twenty lines using specific flags, it is not the implicit fallback behavior.", "isCorrect": false}, {"text": "100", "rationale": "Printing one hundred lines requires explicit argument definition via structural parameters.", "isCorrect": false}]}, {"questionNumber": 8, "question": "Which precise string command structure will show exactly the first 20 lines of a target text document?", "answerOptions": [{"text": "head -l 20 filename.txt", "rationale": "The -l switch is incorrect for modifying line counts within the head utility environment.", "isCorrect": false}, {"text": "head -n 20 filename.txt", "rationale": "The -n option explicitly instructs the utility to read a designated 'number' of lines.", "isCorrect": true}, {"text": "tail -n 20 filename.txt", "rationale": "Tail displays lines starting from the bottom end of the document rather than the top.", "isCorrect": false}, {"text": "cat -lines 20 filename.txt", "rationale": "Cat lacks a standard native option matching this specific parameter syntax.", "isCorrect": false}]}, {"questionNumber": 9, "question": "What is the expected outcome of running the command sequence: 'echo \"Data Management\" > output.txt'?", "answerOptions": [{"text": "It appends the text to the bottom of output.txt without modifying current contents.", "rationale": "Appending requires the double chevron operator rather than a single chevron.", "isCorrect": false}, {"text": "It searches for the string \"Data Management\" inside output.txt.", "rationale": "Searching text contents requires the grep utility instead of input/output stream redirections.", "isCorrect": false}, {"text": "It writes the string into output.txt, completely overwriting any existing contents of the file.", "rationale": "The single greater-than sign acts as an overwrite redirection token, wiping out old structural data in that file.", "isCorrect": true}, {"text": "It triggers an interactive window asking you to authorize file editing steps.", "rationale": "Redirection is immediate and automated via shell interpretations without mid-run confirmation popups.", "isCorrect": false}]}, {"questionNumber": 10, "question": "Which operator must you use if you want to add line outputs to the bottom of an existing file without deleting its current data?", "answerOptions": [{"text": ">", "rationale": "This single character overwrites the destination target and deletes pre-existing context.", "isCorrect": false}, {"text": ">>", "rationale": "The double chevron token acts as the append operator, safety-locking current contents while attaching text to the file's end.", "isCorrect": true}, {"text": "|", "rationale": "This is a pipe operator used to link process outputs to downstream command inputs.", "isCorrect": false}, {"text": "*", "rationale": "This symbol is processed as a wildcard targeting matching elements in directory scopes.", "isCorrect": false}]}, {"questionNumber": 11, "question": "What does the pipe operator '|' do in a Unix shell runtime environment?", "answerOptions": [{"text": "It acts as a logical OR condition evaluating variable definitions.", "rationale": "While true in standard scripting conditionals, within general command architecture it serves as data stream transport mechanics.", "isCorrect": false}, {"text": "It passes the output of the left command as direct input into the right command.", "rationale": "The pipe chains utilities together by feeding output streams forward directly into subsequent processors.", "isCorrect": true}, {"text": "It creates a backup snapshot copy of your running process tree structures.", "rationale": "Chaining symbols do not natively trigger automated system storage operations.", "isCorrect": false}, {"text": "It terminates background tasks instantly.", "rationale": "Task ending operations rely on dedicated termination tools or key inputs like 'q'.", "isCorrect": false}]}, {"questionNumber": 12, "question": "Which command structure allows you to view your entire shell command history while filtering specifically for lines containing \"head -n\"?", "answerOptions": [{"text": "grep \"head -n\" history", "rationale": "History is a built-in shell tool, not a raw plaintext file that can be scanned directly this way.", "isCorrect": false}, {"text": "history | grep \"head -n\"", "rationale": "This pipes the history command output straight to grep, filtering the output lines to match your requested string pattern.", "isCorrect": true}, {"text": "find -name \"history\" | head -n", "rationale": "This format scans filenames instead of log streams and features broken positional syntax.", "isCorrect": false}, {"text": "history > grep \"head -n\"", "rationale": "This incorrectly tries to redirect history data into a file literally named 'grep'.", "isCorrect": false}]}, {"questionNumber": 13, "question": "In Unix search paths and wildcards, what does a single isolated dot character (.) explicitly represent?", "answerOptions": [{"text": "The root administrative system directory.", "rationale": "The root folder directory is mapped globally via the forward slash token.", "isCorrect": false}, {"text": "The current working folder directory.", "rationale": "A single dot resolves explicitly as a self-reference pointing to whichever directory you are presently inside.", "isCorrect": true}, {"text": "An empty text variable string element.", "rationale": "Dot assignments represent explicit physical file positions, not data variable constructs.", "isCorrect": false}, {"text": "The immediate parent directory.", "rationale": "Targeting parent directory paths requires dual dots placed side-by-side.", "isCorrect": false}]}, {"questionNumber": 14, "question": "Which utility should you invoke to look for specific keyword patterns or strings inside the text contents of local files?", "answerOptions": [{"text": "find", "rationale": "Find scans metadata paths to locate files by name or type, rather than peering inside files.", "isCorrect": false}, {"text": "grep", "rationale": "Grep is built to scan file text line-by-line to match user-defined patterns.", "isCorrect": true}, {"text": "pwd", "rationale": "Pwd tracks your environmental movement and prints working directories.", "isCorrect": false}, {"text": "du", "rationale": "Du measures storage footprints rather than processing string values.", "isCorrect": false}]}, {"questionNumber": 15, "question": "What flag makes the 'grep' utility perform a recursive search across all files nested inside subfolders?", "answerOptions": [{"text": "-a", "rationale": "The -a flag is mainly utilized in directory listing setups for showing hidden data.", "isCorrect": false}, {"text": "-r", "rationale": "The -r flag triggers a deep recursive scan down through every nested directory layer.", "isCorrect": true}, {"text": "-n", "rationale": "The -n parameter modifies output line numbers instead of broadening directory scope rules.", "isCorrect": false}, {"text": "-h", "rationale": "The -h parameter suppresses file names or modifies visibility preferences depending on shell types.", "isCorrect": false}]}, {"questionNumber": 16, "question": "Which command structure searches for files based on their names matching a pattern like ending in '.txt'?", "answerOptions": [{"text": "grep \"*.txt\"", "rationale": "Grep searches file text contents, it does not scan directory indexes for filenames.", "isCorrect": false}, {"text": "find -name \"*.txt\"", "rationale": "The find utility scans directory file nodes and filters entries with the -name parameter.", "isCorrect": true}, {"text": "ls -a \"*.txt\"", "rationale": "Ls maps everything out but does not natively handle functional parameter scanning filters this way.", "isCorrect": false}, {"text": "cat -name \"*.txt\"", "rationale": "Cat opens files to output text; it doesn't search across directory paths.", "isCorrect": false}]}, {"questionNumber": 17, "question": "Which system command answers the question 'Who am I?' by printing the active user's username?", "answerOptions": [{"text": "uname", "rationale": "Uname targets core operating system details instead of identity tracking flags.", "isCorrect": false}, {"text": "whoami", "rationale": "The whoami command outputs the effective username of the current user logged into the shell session.", "isCorrect": true}, {"text": "top", "rationale": "Top displays live process activity charts instead of account string references.", "isCorrect": false}, {"text": "history", "rationale": "History prints shell command sequences instead of your logged account profile name.", "isCorrect": false}]}, {"questionNumber": 18, "question": "What information does executing the command 'uname -a' provide to the user?", "answerOptions": [{"text": "A list of all current user accounts on the machine.", "rationale": "User lists require reading core configuration files rather than querying uname structures.", "isCorrect": false}, {"text": "Complete system information, including kernel name, network node hostname, and OS details.", "rationale": "The -a switch stands for all system configuration metrics stored within the core kernel layer.", "isCorrect": true}, {"text": "The file structure layout of your home directory.", "rationale": "File layout tasks are managed by ls, find, or du utilities.", "isCorrect": false}, {"text": "A list of network servers currently reachable by the machine.", "rationale": "Network server reachability tracking relies on communication engines like ping.", "isCorrect": false}]}, {"questionNumber": 19, "question": "Which interactive interface shows system resource statistics alongside a real-time updating list of active processes?", "answerOptions": [{"text": "history", "rationale": "History displays a static log of past text inputs rather than real-time computing charts.", "isCorrect": false}, {"text": "df -h", "rationale": "This static tool checks storage volume maps but doesn't track active CPU workloads.", "isCorrect": false}, {"text": "top", "rationale": "Top spins up an interactive window monitoring real-time active system resources and processes.", "isCorrect": true}, {"text": "du -sh", "rationale": "This summarizes folder weights without checking operating processor states.", "isCorrect": false}]}, {"questionNumber": 20, "question": "If you want to view storage capacity details on mounted drives in a human-readable format, which command is most appropriate?", "answerOptions": [{"text": "du -sh", "rationale": "Du measures localized folder or file sizes, not global system drive storage layouts.", "isCorrect": false}, {"text": "df -h", "rationale": "The df (disk free) command combined with -h outputs whole disk statistics using clean metrics like MB or GB.", "isCorrect": true}, {"text": "top", "rationale": "Top evaluates live processor workloads rather than calculating raw byte capacities on persistent storage disk sets.", "isCorrect": false}, {"text": "chmod 755", "rationale": "Chmod alters file access permission bitmask flags instead of surveying storage metrics.", "isCorrect": false}]}, {"questionNumber": 21, "question": "What is the correct syntax to create a compressed tarball archive (.tar.gz) from a specific target folder?", "answerOptions": [{"text": "tar -xzf archive.tar.gz folder/", "rationale": "The -x flag signifies extraction, which is the exact opposite of creating an archive file.", "isCorrect": false}, {"text": "tar -czf archive.tar.gz folder/", "rationale": "The flags stand for create (-c), zip/gzip compression (-z), and file output targets (-f).", "isCorrect": true}, {"text": "zip -xzf archive.tar.gz folder/", "rationale": "Zip is a separate tool with its own syntax rules and does not use these specific flags.", "isCorrect": false}, {"text": "tar -create archive.tar.gz folder/", "rationale": "Standard tar syntax relies on short hyphenated single-letter switches rather than verbose string arguments.", "isCorrect": false}]}, {"questionNumber": 22, "question": "Which command extracts/unpacks a '.tar.gz' file into your current working folder?", "answerOptions": [{"text": "tar -czf file.tar.gz", "rationale": "This switch configuration creates archives rather than extracting contents.", "isCorrect": false}, {"text": "tar -xzf file.tar.gz", "rationale": "The -x parameter switch stands for extract, which pulls contents out of the targeted compressed file archive.", "isCorrect": true}, {"text": "unzip file.tar.gz", "rationale": "The unzip tool is used for standard '.zip' formats, not '.tar.gz' tarballs.", "isCorrect": false}, {"text": "tar -extract file.tar.gz", "rationale": "This long-form phrasing is syntactically invalid for standard tar utility flags.", "isCorrect": false}]}, {"questionNumber": 23, "question": "According to the guide's comparison chart, what is a key limitation of the standard '.zip' format compared to '.tar.gz' on Linux?", "answerOptions": [{"text": "It can never be unzipped on a Windows machine.", "rationale": "Zip files are natively compatible with Windows without requiring third-party extraction software.", "isCorrect": false}, {"text": "It has limited preservation of Unix file permissions.", "rationale": "The zip format lacks full native support for retaining granular Unix permissions across complex directory structures.", "isCorrect": true}, {"text": "It completely prohibits directory compression steps.", "rationale": "Directories can be zipped efficiently as long as recursive parameters are applied during execution.", "isCorrect": false}, {"text": "It is the native default archiving engine pre-configured across all Linux systems.", "rationale": "Tar is the default native standard on Linux, whereas zip support often requires external package additions.", "isCorrect": false}]}, {"questionNumber": 24, "question": "In Unix octal permission calculations, what numeric values are assigned to read (r), write (w), and execute (x) respectively?", "answerOptions": [{"text": "r=1, w=2, x=4", "rationale": "This ordering swaps the values for read and execute permissions.", "isCorrect": false}, {"text": "r=4, w=2, x=1", "rationale": "In octal permission notation, read equals 4, write equals 2, and execute equals 1.", "isCorrect": true}, {"text": "r=7, w=5, x=5", "rationale": "These represent final aggregated totals for user roles rather than single permission weights.", "isCorrect": false}, {"text": "r=3, w=2, x=1", "rationale": "Read permissions require a numeric weight of 4 to keep permission calculations distinct.", "isCorrect": false}]}, {"questionNumber": 25, "question": "What access rights are granted to a file configured with the permission level 'chmod 755 filename'?", "answerOptions": [{"text": "Full access (rwx) for everyone on the machine.", "rationale": "Universal full access requires an octal setting of 777.", "isCorrect": false}, {"text": "Full access (rwx) for the owner, and read/execute (rx) access for the group and world.", "rationale": "The first digit (7 = 4+2+1) sets owner permissions; the next two digits (5 = 4+1) set group and world permissions.", "isCorrect": true}, {"text": "Read-only access for the owner, and write-only access for all others.", "rationale": "An octal value of 7 provides write and execute access in addition to read access.", "isCorrect": false}, {"text": "It locks the file entirely and blocks access for all users.", "rationale": "Locking down a file completely requires setting all octal permission bits to 000.", "isCorrect": false}]}, {"questionNumber": 26, "question": "When inspecting long-format file attributes via 'ls -l', how do you tell if an entry is a directory rather than a standard file?", "answerOptions": [{"text": "The permission string block ends with a trailing exclamation point.", "rationale": "Exclamation points are not used as type indicators within standard long-listing permission blocks.", "isCorrect": false}, {"text": "The very first character of the permission string is a 'd'.", "rationale": "A leading 'd' in the permissions field explicitly identifies that row item as a directory.", "isCorrect": true}, {"text": "The file size metrics automatically read zero bytes.", "rationale": "Directories still have internal index cluster allocations that reflect non-zero storage sizes.", "isCorrect": false}, {"text": "The entry name is written entirely in uppercase letters.", "rationale": "Unix file structures allow lowercase directory names and are unaffected by alphabetical casing conventions.", "isCorrect": false}]}, {"questionNumber": 27, "question": "Which network utility and command combination downloads a file from a URL while preserving its original remote filename?", "answerOptions": [{"text": "curl -o remote_file.txt URL", "rationale": "The lowercase -o option renames the downloaded file to a custom string argument rather than keeping the original filename.", "isCorrect": false}, {"text": "curl -O URL", "rationale": "The uppercase -O flag instructs curl to extract and use the exact file name found on the remote server path.", "isCorrect": true}, {"text": "ping -O URL", "rationale": "Ping tests server latency and network connections, it cannot download web files.", "isCorrect": false}, {"text": "wget -rename URL", "rationale": "Wget is an alternate tool, and this specific parameter option is syntactically incorrect.", "isCorrect": false}]}, {"questionNumber": 28, "question": "What does running the command 'curl -o page.html URL' perform?", "answerOptions": [{"text": "It prints the raw networking ping speeds of page.html to the console.", "rationale": "Latency tracking tasks require the ping utility instead of file fetch tools.", "isCorrect": false}, {"text": "It downloads the resource from the URL and saves it locally under the new name 'page.html'.", "rationale": "The lowercase -o switch redirects output to a designated local file name.", "isCorrect": true}, {"text": "It recursively copies page.html into an archive folder structure.", "rationale": "Archive creations require utility software configurations such as tar or zip engines.", "isCorrect": false}, {"text": "It opens an interactive editor to modify page.html on the remote web host.", "rationale": "Curl is a data transfer utility, not a remote code editor or administrative connection client.", "isCorrect": false}]}, {"questionNumber": 29, "question": "Which modifier flag adds a visual progress bar (`#` symbols) to a 'curl' file download stream?", "answerOptions": [{"text": "-#", "rationale": "The -# (or bar switch) transforms plain log updates into a clean bar graph built out of hash signs.", "isCorrect": true}, {"text": "-progress", "rationale": "Verbose text arguments like this do not match standard native curl progress flags.", "isCorrect": false}, {"text": "-v", "rationale": "The -v switch triggers verbose connection logs rather than displaying a clean progress metric.", "isCorrect": false}, {"text": "-b", "rationale": "The -b flag is reserved for handling cookies during web requests.", "isCorrect": false}]}, {"questionNumber": 30, "question": "What output is produced by executing the word count command 'wc -l gpl-3.0.txt'?", "answerOptions": [{"text": "The total number of characters contained inside gpl-3.0.txt.", "rationale": "Counting raw characters requires the -c flag instead of the -l flag.", "isCorrect": false}, {"text": "The total number of lines inside the gpl-3.0.txt file.", "rationale": "The -l switch modifies the word count utility to specifically count newline characters or total lines.", "isCorrect": true}, {"text": "The storage weight of the file measured in kilobytes.", "rationale": "File system size checks require du or ls commands instead of word count utilities.", "isCorrect": false}, {"text": "A list of misspelled words found in the document.", "rationale": "Spellcheck verification requires dedicated language dictionary processing packages.", "isCorrect": false}]}]};
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            quizData.questions.forEach((q, qIdx) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.setAttribute('data-qidx', qIdx);
+
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.innerText = q.questionNumber + ". " + q.question;
+                card.appendChild(qText);
+
+                const optsList = document.createElement('ul');
+                optsList.className = 'options-list';
+
+                q.answerOptions.forEach((opt, oIdx) => {
+                    const li = document.createElement('li');
+                    li.className = 'option-item';
+                    li.innerText = opt.text;
+                    li.onclick = () => selectOption(qIdx, oIdx, li);
+                    optsList.appendChild(li);
+                });
+
+                card.appendChild(optsList);
+
+                const ratBox = document.createElement('div');
+                ratBox.className = 'rationale';
+                ratBox.id = `rat-${qIdx}`;
+                card.appendChild(ratBox);
+
+                container.appendChild(card);
+            });
+        }
+
+        let selections = {};
+
+        function selectOption(qIdx, oIdx, element) {
+            const card = document.querySelector(`[data-qidx="${qIdx}"]`);
+            card.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selections[qIdx] = oIdx;
+        }
+
+        function gradeQuiz() {
+            let correctCount = 0;
+            quizData.questions.forEach((q, qIdx) => {
+                const ratBox = document.getElementById(`rat-${qIdx}`);
+                const selectedOIdx = selections[qIdx];
+                
+                if (selectedOIdx === undefined) {
+                    ratBox.className = 'rationale incorrect';
+                    ratBox.innerHTML = '<strong>Not Answered.</strong> Please pick an option.';
+                    ratBox.style.display = 'block';
+                    return;
+                }
+
+                const chosenOpt = q.answerOptions[selectedOIdx];
+                const correctOptIndex = q.answerOptions.findIndex(o => o.isCorrect);
+                const correctOpt = q.answerOptions[correctOptIndex];
+
+                if (chosenOpt.isCorrect) {
+                    correctCount++;
+                    ratBox.className = 'rationale correct';
+                    ratBox.innerHTML = '<strong>Correct!</strong> ' + chosenOpt.rationale;
+                } else {
+                    ratBox.className = 'rationale incorrect';
+                    ratBox.innerHTML = '<strong>Incorrect.</strong> You chose ' + chosenOpt.text + '. <br><em>Correct Answer:</em> ' + correctOpt.text + ' — ' + correctOpt.rationale;
+                }
+                ratBox.style.display = 'block';
+            });
+
+            const scoreBanner = document.getElementById('scoreBanner');
+            scoreBanner.innerText = `Quiz Complete! You scored ${correctCount} / ${quizData.questions.length} (${Math.round((correctCount/quizData.questions.length)*100)}%)`;
+            scoreBanner.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadoop Ecosystem & Big Data Comprehensive Quiz</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+        }
+        h1 {
+            color: #0f172a;
+            border-bottom: 3px solid #cbd5e1;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }
+        .subtitle {
+            color: #475569;
+            font-size: 1.1em;
+            margin-bottom: 35px;
+        }
+        .question-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .option-item {
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #f8fafc;
+        }
+        .option-item:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+        .option-item.selected {
+            background: #3b82f6;
+            color: white;
+            border-color: #2563eb;
+            font-weight: 500;
+        }
+        .action-btn {
+            background-color: #059669;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: block;
+            margin: 40px auto 10px auto;
+        }
+        .action-btn:hover {
+            background-color: #047857;
+        }
+        .rationale {
+            margin-top: 15px;
+            padding: 14px 16px;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.98em;
+        }
+        .correct {
+            background-color: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        .incorrect {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+        }
+        .score-banner {
+            display: none;
+            text-align: center;
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            font-size: 1.35em;
+            font-weight: bold;
+            color: #065f46;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hadoop Ecosystem & Big Data Comprehensive Quiz</h1>
+        <p class="subtitle">Test your knowledge on HDFS architecture, MapReduce paradigms, Apache Pig, Apache Spark structures, and Apache Hive querying layers. Pick your choices and verify final metrics below.</p>
+        
+        <div id="scoreBanner" class="score-banner"></div>
+        <div id="quizContainer"></div>
+        
+        <button class="action-btn" id="submitBtn" onclick="gradeQuiz()">Submit Quiz & Check Answers</button>
+    </div>
+
+    <script>
+        const quizData = {
+          "questions": [
+            {
+              "questionNumber": 1,
+              "question": "What is the primary architectural mechanism that the Hadoop Distributed File System (HDFS) uses to optimize and accommodate exceptionally large physical files?",
+              "answerOptions": [
+                {"text": "Files are compressed globally using automated standard ZIP archive formats.", "isCorrect": false, "rationale": "Compression algorithms can be used, but HDFS structures fundamentally handle size distribution by cutting file payloads into physical blocks."},
+                {"text": "Files are partitioned and divided into fixed-size blocks distributed across a cluster of data nodes.", "isCorrect": true, "rationale": "HDFS breaks massive files down into distinct chunks (blocks) which it then maps and spreads out systematically across cluster hardware nodes."},
+                {"text": "Files are stored completely in the volatile RAM memory layer of the client machine.", "isCorrect": false, "rationale": "HDFS is a persistent, disk-based distributed storage layer rather than a localized volatile volatile-memory repository."},
+                {"text": "Files are translated entirely into relational database tables.", "isCorrect": false, "rationale": "HDFS is a file system engineered specifically for unformatted, structured, or semi-structured raw storage streams rather than relational schemas."}
+              ]
+            },
+            {
+              "questionNumber": 2,
+              "question": "By default configuration standards in modern Hadoop deployments (such as HDP 2.6.5), what is the typical block size for a file chunk stored inside HDFS?",
+              "answerOptions": [
+                {"text": "4 KB", "isCorrect": false, "rationale": "This represents a standard virtual memory paging or localized disk sector block size, which is far too tiny for efficient data streams."},
+                {"text": "64 KB", "isCorrect": false, "rationale": "This value is typical for network buffer windows or low-level configurations, not modern Big Data distributed tracking nodes."},
+                {"text": "128 MB", "isCorrect": true, "rationale": "The modern industry baseline default allocation for an HDFS block is exactly 128 megabytes to optimize network stream payloads."},
+                {"text": "10 GB", "isCorrect": false, "rationale": "A block size this massive would severely limit parallel processing capabilities because small files would not get distributed."}
+              ]
+            },
+            {
+              "questionNumber": 3,
+              "question": "If an administrator configures an HDFS cluster block size to be excessively small, what is the major structural system bottleneck that will manifest?",
+              "answerOptions": [
+                {"text": "DataNodes will automatically experience persistent storage hardware failure.", "isCorrect": false, "rationale": "DataNode physical durability is independent of software file mapping layer assignments."},
+                {"text": "The NameNode will become overloaded by holding an excessive amount of block metadata memory allocations.", "isCorrect": true, "rationale": "Because the NameNode tracks the directory tree and the locations of every single block in RAM, creating too many tiny blocks exhausts its memory."},
+                {"text": "Parallel processing workflows will be completely prohibited across the cluster.", "isCorrect": false, "rationale": "Smaller blocks can actually increase theoretical parallelism slots, though it ruins overall performance due to scheduling overloads."},
+                {"text": "The cluster will completely run out of raw underlying physical storage disk space immediately.", "isCorrect": false, "rationale": "The physical footprint of the file data remains roughly identical; only the administrative tracking metadata changes."}
+              ]
+            },
+            {
+              "questionNumber": 4,
+              "question": "What is the consequence of configuring an HDFS file block size to be excessively large?",
+              "answerOptions": [
+                {"text": "Parallelism cannot be effectively achieved during processing.", "isCorrect": true, "rationale": "If blocks are too massive, fewer individual chunks exist, meaning fewer cluster nodes can work on different segments of the dataset at the same time."},
+                {"text": "The NameNode will crash due to metadata memory exhaustion errors.", "isCorrect": false, "rationale": "Fewer blocks actually reduce the metadata overhead burden carried within NameNode system memories."},
+                {"text": "Data replication services will be strictly disabled by the configuration layer.", "isCorrect": false, "rationale": "Replication counts are handled independently by cluster parameters and work with blocks regardless of their size."},
+                {"text": "Files can no longer be transferred using standard terminal commands.", "isCorrect": false, "rationale": "File system entry points operate normally regardless of internal structure properties."}
+              ]
+            },
+            {
+              "questionNumber": 5,
+              "question": "In the core MapReduce execution pipeline framework, what are the precise operational steps taken by the 'Mapper' phase?",
+              "answerOptions": [
+                {"text": "It aggregates all data elements together to produce a consolidated sum score.", "isCorrect": false, "rationale": "Aggregation operations are handled by Reducer nodes downstream after data sorting steps occur."},
+                {"text": "It maps each individual input line to a structured key-value pair, such as (rating, 1).", "isCorrect": true, "rationale": "The Mapper's core job is to digest raw data lines and project them into transitional, un-aggregated intermediate key-value mappings."},
+                {"text": "It distributes physical data blocks to alternative backup hardware racks across network pipelines.", "isCorrect": false, "rationale": "Data replication and block management tasks belong exclusively to HDFS routines, not MapReduce code applications."},
+                {"text": "It translates structural relational tables into object-oriented programming schemas.", "isCorrect": false, "rationale": "Mappers stream through raw data strings without enforcing persistent application framework changes."}
+              ]
+            },
+            {
+              "questionNumber": 6,
+              "question": "What is the primary role assigned to the 'Reducer' phase within a MapReduce execution process?",
+              "answerOptions": [
+                {"text": "It reduces the size of HDFS blocks on the underlying storage drive partitions.", "isCorrect": false, "rationale": "The Reducer does not affect file system block storage layer architectures."},
+                {"text": "It processes grouped intermediate keys and aggregates their values to compute a final consolidated metric.", "isCorrect": true, "rationale": "Reducers take all intermediate values mapped to a specific matching key and consolidate them down to a final calculation."},
+                {"text": "It reads data files sequentially from remote HTTP web server links.", "isCorrect": false, "rationale": "Data loading paths are managed via cluster input formatters matching localized HDFS endpoints."},
+                {"text": "It completely formats raw unstructured text streams into highly structured Excel documents.", "isCorrect": false, "rationale": "MapReduce engines generally generate raw text or binary key value sequence files as outputs."}
+              ]
+            },
+            {
+              "questionNumber": 7,
+              "question": "What primary problem motivated the development and integration of Apache Pig inside the Hadoop ecosystem?",
+              "answerOptions": [
+                {"text": "Writing raw Java MapReduce programs by hand requires significant time and complex boilerplate development.", "isCorrect": true, "rationale": "Apache Pig abstracts the tedious process of writing low-level Java mappers and reducers by providing an easier script interface."},
+                {"text": "HDFS was completely incapable of storing text files safely without external metadata validation layers.", "isCorrect": false, "rationale": "HDFS stores any data file securely regardless of whether Pig or alternative cluster layers are deployed."},
+                {"text": "Java was completely deprecated from runtime availability across big data processing clusters.", "isCorrect": false, "rationale": "Hadoop components remain deeply integrated with Java underlying infrastructures."},
+                {"text": "Data clusters needed an operational system to clear volatile RAM memory caches automatically.", "isCorrect": false, "rationale": "Memory clearing tasks are managed by operating system kernels and cluster resource managers."}
+              ]
+            },
+            {
+              "questionNumber": 8,
+              "question": "What is the name of the specialized, data-flow-oriented scripting language used to write processing jobs inside Apache Pig?",
+              "answerOptions": [
+                {"text": "HiveQL", "isCorrect": false, "rationale": "HiveQL is the SQL-like query language utilized exclusively by Apache Hive architectures."},
+                {"text": "Pig Latin", "isCorrect": true, "rationale": "The scripting language designed to express procedural transformations within Apache Pig is called Pig Latin."},
+                {"text": "Scala", "isCorrect": false, "rationale": "Scala is a distinct high-level object-functional language commonly used to build Apache Spark frameworks."},
+                {"text": "Python SQL", "isCorrect": false, "rationale": "This is a descriptive blend of tools, not an official independent language definition for Apache Pig execution layers."}
+              ]
+            },
+            {
+              "questionNumber": 9,
+              "question": "Which of the following describes the architecture framework known as TEZ?",
+              "answerOptions": [
+                {"text": "A physical hardware rack built to isolate broken data nodes.", "isCorrect": false, "rationale": "Tez is a pure software application framework, not a tangible physical network layout solution."},
+                {"text": "An application framework that builds complex directed-acyclic graphs (DAGs) of tasks to process data efficiently.", "isCorrect": true, "rationale": "Tez replaces rigid multi-stage MapReduce patterns with a flexible Directed Acyclic Graph tracking structure that optimizes data flow performance."},
+                {"text": "A relational structural file layout that strictly forces zero column duplication entries.", "isCorrect": false, "rationale": "Tez is an execution layer framework rather than a structural database organization model."},
+                {"text": "A web browser client designed to monitor network interface card speeds.", "isCorrect": false, "rationale": "Tez handles data job optimization instead of tracking device telemetry."}
+              ]
+            },
+            {
+              "questionNumber": 10,
+              "question": "Which big data framework is explicitly optimized to translate standard SQL style query scripts into MapReduce or TEZ jobs on Hadoop clusters?",
+              "answerOptions": [
+                {"text": "Apache Pig", "isCorrect": false, "rationale": "Pig interprets custom procedural Pig Latin scripts rather than standard declarative SQL formats."},
+                {"text": "Apache Hive", "isCorrect": true, "rationale": "Hive provides a data warehouse architecture layer that converts relational SQL structures (HiveQL) into executable tasks."},
+                {"text": "VirtualBox Engine", "isCorrect": false, "rationale": "VirtualBox is an abstraction system layer for running localized virtual guest operating systems."},
+                {"text": "HDFS Namenode Core", "isCorrect": false, "rationale": "The NameNode only monitors data layout addresses and directories; it does not parse execution query logic."}
+              ]
+            },
+            {
+              "questionNumber": 11,
+              "question": "According to the provided guides, which class of professionals is Apache Hive primarily targeted toward compared to Apache Pig?",
+              "answerOptions": [
+                {"text": "Hardware networking technicians modifying physical server connections.", "isCorrect": false, "rationale": "Neither tool manages physical infrastructure configurations."},
+                {"text": "Data analysts, because it relies on familiar declarative SQL syntax.", "isCorrect": true, "rationale": "Hive allows data analysts to easily query massive data sets using SQL structures without requiring software engineering skills."},
+                {"text": "Core kernel developers specialized in embedded assembly routines.", "isCorrect": false, "rationale": "Hive abstracts low-level infrastructure to keep user interfaces simple."},
+                {"text": "Graphic designers constructing visual layout interfaces.", "isCorrect": false, "rationale": "Hive is an analytical command-line and query processing system for data tables."}
+              ]
+            },
+            {
+              "questionNumber": 12,
+              "question": "What type of data structures is Apache Hive uniquely engineered to evaluate compared to Apache Pig?",
+              "answerOptions": [
+                {"text": "Completely unstructured audio files and video metadata streams.", "isCorrect": false, "rationale": "Hive requires predictable tabular definitions, whereas Pig is better suited for handling semi-structured inputs."},
+                {"text": "Highly structured data matching traditional data warehouse application tables.", "isCorrect": true, "rationale": "Hive relies heavily on strict column data tables, making it perfect for structured data warehouse environments."},
+                {"text": "Binary machine execution scripts generated by compiler tasks.", "isCorrect": false, "rationale": "Neither tool is designed to compile or manage local operating system binary files."},
+                {"text": "Volatile memory cache registers on internal CPU components.", "isCorrect": false, "rationale": "Hive manages persistent big data assets stored on disk systems like HDFS."}
+              ]
+            },
+            {
+              "questionNumber": 13,
+              "question": "In the Apache Pig Latin framework, what simple data type represents a standard text string saved using UTF-8 format?",
+              "answerOptions": [
+                {"text": "Int", "isCorrect": false, "rationale": "Int represents whole numeric values without decimal fractions."},
+                {"text": "Chararray", "isCorrect": true, "rationale": "In Pig Latin, string variables and text blocks are explicitly defined under the 'chararray' data type category."},
+                {"text": "Tuple", "isCorrect": false, "rationale": "A tuple is an ordered complex set containing fields, not a single raw text string element."},
+                {"text": "Long", "isCorrect": false, "rationale": "Long defines large whole integer numeric values tagged with an 'L' marker suffix."}
+              ]
+            },
+            {
+              "questionNumber": 14,
+              "question": "How is a 'tuple' defined within the complex data type classifications of Apache Pig?",
+              "answerOptions": [
+                {"text": "An unordered cluster of multiple identical data bags.", "isCorrect": false, "rationale": "Bags can contain tuples, but a single tuple is a flat sequence of simple elements."},
+                {"text": "An ordered set of data fields, which behaves similarly to a row inside a table structure.", "isCorrect": true, "rationale": "A tuple is a single record structure made of ordered fields, enclosed by parentheses."},
+                {"text": "A set of key-value pairs formatted like a JSON dictionary configuration.", "isCorrect": false, "rationale": "Key-value pair configurations match the 'map' data type definition in Pig, not the tuple definition."},
+                {"text": "A volatile text string containing less than three character elements.", "isCorrect": false, "rationale": "Tuples handle multi-field complex records rather than basic text primitives."}
+              ]
+            },
+            {
+              "questionNumber": 15,
+              "question": "What is a 'bag' within the context of Apache Pig complex data types?",
+              "answerOptions": [
+                {"text": "A cryptographic hash key sequence that locks database entries.", "isCorrect": false, "rationale": "Bags are pure collection variables, not security validation keys."},
+                {"text": "An unordered collection of tuples.", "isCorrect": true, "rationale": "A bag contains an unordered collection of tuples, enclosed by curly braces."},
+                {"text": "A numeric integer value representing disk cluster partition sectors.", "isCorrect": false, "rationale": "Numeric parameters are handled by primitive types like Int, Float, or Long."},
+                {"text": "A system tool used to clean up unreferenced variables from memory.", "isCorrect": false, "rationale": "This describes garbage collection tools, which are separate from data container definitions."}
+              ]
+            },
+            {
+              "questionNumber": 16,
+              "question": "If you need to represent an asset using a key-value structure, like [name#John, phone#5551212], which Pig data type is correct?",
+              "answerOptions": [
+                {"text": "Tuple", "isCorrect": false, "rationale": "Tuples store simple ordered sequences of fields without key-association indicators."},
+                {"text": "Map", "isCorrect": true, "rationale": "A map is a specific complex type container holding pairs of keys and values, defined within bracket markers."},
+                {"text": "Bag", "isCorrect": false, "rationale": "Bags group collections of tuples together rather than managing single hash-linked lookup records."},
+                {"text": "Chararray", "isCorrect": false, "rationale": "Chararray maps primitive, flat text string outputs without structured associative lookup logic."}
+              ]
+            },
+            {
+              "questionNumber": 17,
+              "question": "According to the official Apache Spark documentation definition, what is Spark?",
+              "answerOptions": [
+                {"text": "A single-threaded database engine engineered exclusively to run on legacy mainframe systems.", "isCorrect": false, "rationale": "Spark is highly parallelized and built for single-node machines up to massive commodity compute clusters."},
+                {"text": "A multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters.", "isCorrect": true, "rationale": "Spark provides a flexible analytics platform with support for multiple programming languages across scalable infrastructures."},
+                {"text": "A hardware routing switch that optimizes local ethernet fiber optic speeds.", "isCorrect": false, "rationale": "Spark is an analytics software platform engine, not a piece of physical network hardware infrastructure."},
+                {"text": "A security protocol built to encrypt text strings inside configuration documents.", "isCorrect": false, "rationale": "Spark is designed for scalable computation tasks, not cryptographic security transformations."}
+              ]
+            },
+            {
+              "questionNumber": 18,
+              "question": "What is the primary architectural performance advantage that allows Apache Spark to run significantly faster than traditional Hadoop MapReduce setups?",
+              "answerOptions": [
+                {"text": "It forces all data files to be completely wiped out after single executions.", "isCorrect": false, "rationale": "Spark keeps source assets safe while storing output results on stable file storage layers."},
+                {"text": "It is a memory-based solution that retains data in RAM cache structures instead of continuously writing to physical disks.", "isCorrect": true, "rationale": "By caching data in random access memory, Spark avoids the slow disk read and write bottlenecks that limit MapReduce performance."},
+                {"text": "It relies entirely on hardware processors that use unique non-standard machine execution steps.", "isCorrect": false, "rationale": "Spark runs smoothly on standard x86 or ARM architecture cluster hardware options."},
+                {"text": "It completely removes the need for any network switch connectivity during parallel execution steps.", "isCorrect": false, "rationale": "Clusters still rely heavily on physical network topologies to coordinate distributed computing tasks."}
+              ]
+            },
+            {
+              "questionNumber": 19,
+              "question": "According to benchmarks, how much faster can Apache Spark execute programs in-memory compared to traditional Hadoop MapReduce workflows?",
+              "answerOptions": [
+                {"text": "Up to 2x faster", "isCorrect": false, "rationale": "The actual performance gains are significantly higher due to eliminating disk read/write cycles between processing stages."},
+                {"text": "Up to 100x faster", "isCorrect": true, "rationale": "Spark can run analytical programs up to 100 times faster in memory than standard MapReduce workflows."},
+                {"text": "Exactly 5x faster", "isCorrect": false, "rationale": "Five times understates Spark's optimization capabilities when managing multi-stage graph pipelines."},
+                {"text": "Precisely 1000x slower", "isCorrect": false, "rationale": "Spark is designed to optimize processing pipelines and run much faster than legacy architectures."}
+              ]
+            },
+            {
+              "questionNumber": 20,
+              "question": "What core structural optimization technique does Spark's Directed Acyclic Graph (DAG) engine use to execute workflows efficiently?",
+              "answerOptions": [
+                {"text": "It works backwards from the intended end result to calculate the most efficient operational processing path.", "isCorrect": true, "rationale": "The DAG engine builds a logical plan by evaluating dependencies in reverse from the final action to eliminate redundant processing steps."},
+                {"text": "It encrypts file tables using multi-key security logic before running data queries.", "isCorrect": false, "rationale": "The DAG engine focuses on optimizing execution steps rather than managing security layers."},
+                {"text": "It forces cluster node computing processors to run at higher hardware clock frequencies.", "isCorrect": false, "rationale": "DAG operates purely at the logical software layer and does not alter physical hardware components."},
+                {"text": "It automatically converts all Python script files into Java data warehouse formats.", "isCorrect": false, "rationale": "Language layers interface directly with execution APIs without requiring file conversions."}
+              ]
+            },
+            {
+              "questionNumber": 21,
+              "question": "What does the abbreviation 'RDD' stand for within the fundamental core architectural engine of Apache Spark?",
+              "answerOptions": [
+                {"text": "Relational Data Dictionary", "isCorrect": false, "rationale": "This matches structural database reference catalogs, not Spark's core container abstraction models."},
+                {"text": "Resilient Distributed Dataset", "isCorrect": true, "rationale": "An RDD is a Resilient Distributed Dataset, which is the foundational data object abstraction used in Spark computing tasks."},
+                {"text": "Randomized Disk Directory", "isCorrect": false, "rationale": "Spark focuses on structuring memory data objects rather than designing storage disk directory paths."},
+                {"text": "Redundant Data Device", "isCorrect": false, "rationale": "This describes hardware backup disk arrays like RAID configurations, not Spark software objects."}
+              ]
+            },
+            {
+              "questionNumber": 22,
+              "question": "Which component of an Apache Spark architecture is responsible for distributing and executing individual task fragments across data worker computers?",
+              "answerOptions": [
+                {"text": "The NameNode", "isCorrect": false, "rationale": "The NameNode belongs to the HDFS storage layer and tracks physical block addresses rather than managing Spark analytics tasks."},
+                {"text": "The Executor", "isCorrect": true, "rationale": "Executors run on cluster worker nodes, where they manage data caches and run assigned processing tasks."},
+                {"text": "The Grunt Shell", "isCorrect": false, "rationale": "Grunt is the interactive terminal command shell used to execute Apache Pig scripts."},
+                {"text": "The Ambari Dashboard", "isCorrect": false, "rationale": "Ambari is a cluster management web interface used for monitoring metrics and configurations, not an execution engine."}
+              ]
+            },
+            {
+              "questionNumber": 23,
+              "question": "In a running Hive session, which command component clause sorts data records in descending alphabetical or numeric sequence?",
+              "answerOptions": [
+                {"text": "ORDER BY column ASC", "isCorrect": false, "rationale": "The ASC suffix sorts data records in ascending sequence, which is the standard default behavior."},
+                {"text": "ORDER BY column DESC", "isCorrect": true, "rationale": "Adding the DESC keyword to the ORDER BY clause instructs the query to sort output rows in descending order."},
+                {"text": "SORT THROUGH column DOWN", "isCorrect": false, "rationale": "This syntax is invalid and does not match standard relational SQL parsing rules."},
+                {"text": "GROUP BY column REVERSE", "isCorrect": false, "rationale": "The GROUP BY clause is used to aggregate data records together, not to sort output sequence loops."}
+              ]
+            },
+            {
+              "questionNumber": 24,
+              "question": "Which HiveQL statement group allows you to aggregate metrics based on a specific column, such as counting workers grouped by salary levels?",
+              "answerOptions": [
+                {"text": "ORDER BY column", "isCorrect": false, "rationale": "ORDER BY changes the final display sorting order of rows, but it does not merge or aggregate records."},
+                {"text": "GROUP BY column", "isCorrect": true, "rationale": "The GROUP BY clause aggregates rows that share the same values into summary data rows."},
+                {"text": "WHERE column CONTAINS", "isCorrect": false, "rationale": "WHERE filters specific rows based on conditional checks before any aggregation occurs."},
+                {"text": "SELECT * FILTER", "isCorrect": false, "rationale": "This syntax is invalid for defining standard relational aggregation filters."}
+              ]
+            },
+            {
+              "questionNumber": 25,
+              "question": "What happens behind the scenes when a user runs a declarative statement like 'SELECT * FROM employee WHERE salary > 40000' inside Apache Hive?",
+              "answerOptions": [
+                {"text": "The system pauses all cluster storage drives to check local configuration settings.", "isCorrect": false, "rationale": "Queries run as live application processing tasks without disrupting storage access layer tools."},
+                {"text": "Hive translates the query script into optimized MapReduce or TEZ jobs to filter and extract matching records from HDFS.", "isCorrect": true, "rationale": "Hive translates high-level SQL queries into low-level execution tasks that run across the cluster."},
+                {"text": "The command converts text records directly into object-oriented executable program code.", "isCorrect": false, "rationale": "The underlying table data remains unchanged on disk; only the filtered query results are streamed to the output display."},
+                {"text": "The system triggers a complete cluster reboot to clear data caches.", "isCorrect": false, "rationale": "Queries execute as standard tasks without requiring infrastructure restarts."}
+              ]
+            },
+            {
+              "questionNumber": 26,
+              "question": "Which terminal command shell allows developers to execute interactive procedural Pig Latin script commands directly inside the environment?",
+              "answerOptions": [
+                {"text": "The HiveQL Interface", "isCorrect": false, "rationale": "The HiveQL interface is built specifically for running relational database queries, not procedural Pig Latin code."},
+                {"text": "The Grunt Shell", "isCorrect": true, "rationale": "The interactive command-line shell used to run individual Pig Latin commands on a cluster is called Grunt."},
+                {"text": "The Ambari Admin Console", "isCorrect": false, "rationale": "Ambari is a web-based cluster management console used for system monitoring and configuration updates."},
+                {"text": "The HDFS Master CLI", "isCorrect": false, "rationale": "The HDFS command-line tool manages storage directory layouts and file permissions rather than running code scripts."}
+              ]
+            },
+            {
+              "questionNumber": 27,
+              "question": "What specific data science and machine learning library does Apache Spark include to support predictive analytics tasks?",
+              "answerOptions": [
+                {"text": "Pig Latin Engine", "isCorrect": false, "rationale": "Pig Latin is a procedural scripting language used for data transformation pipelines in Apache Pig."},
+                {"text": "MLLib", "isCorrect": true, "rationale": "Spark includes MLLib, a built-in machine learning library that provides scalable algorithms for tasks like classification and recommendation engines."},
+                {"text": "Tez Graph API", "isCorrect": false, "rationale": "Tez is an underlying execution framework layer, not an analytical machine learning algorithm package library."},
+                {"text": "HiveQL Metadata Store", "isCorrect": false, "rationale": "The Hive catalog store maps column schemas for database tables rather than running advanced machine learning algorithms."}
+              ]
+            },
+            {
+              "questionNumber": 28,
+              "question": "In Spark DataFrames, which analytical command allows users to isolate and filter rows based on a specific criteria condition string?",
+              "answerOptions": [
+                {"text": "myDataFrame.groupBy()", "isCorrect": false, "rationale": "The groupBy method aggregates data rows together rather than filtering individual rows out."},
+                {"text": "myDataFrame.filter()", "isCorrect": true, "rationale": "The filter method evaluates rows against a conditional criteria string and keeps only the matching entries."},
+                {"text": "myDataFrame.select()", "isCorrect": false, "rationale": "The select method isolates specific vertical columns rather than filtering individual horizontal records."},
+                {"text": "myDataFrame.mean()", "isCorrect": false, "rationale": "The mean method calculates mathematical averages for numeric columns instead of filtering rows."}
+              ]
+            },
+            {
+              "questionNumber": 29,
+              "question": "What is the primary role of the 'NameNode' component within a Hadoop Distributed File System architecture?",
+              "answerOptions": [
+                {"text": "It stores all raw file contents and data block payloads across localized worker disks.", "isCorrect": false, "rationale": "Raw file data block payloads are stored exclusively on worker nodes called DataNodes."},
+                {"text": "It acts as the master node that manages the file system directory tree and tracks the block locations across the cluster.", "isCorrect": true, "rationale": "The NameNode acts as the central master node, storing directory structure mapping details and block addresses within its memory."},
+                {"text": "It compiles Python scripts into executable Java archive bytecode format packages.", "isCorrect": false, "rationale": "The NameNode manages storage metadata and does not interpret user application programming code languages."},
+                {"text": "It runs the web server that hosts external dashboard metrics.", "isCorrect": false, "rationale": "Dashboard hosting is managed by independent management interface layers like Apache Ambari."}
+              ]
+            },
+            {
+              "questionNumber": 30,
+              "question": "What underlying physical resource parameter configuration rule is recommended in the guides to properly set up a guest Virtual Machine sandbox for Hadoop?",
+              "answerOptions": [
+                {"text": "Allocating exactly 512 KB of old floppy disk drive storage capacity slots.", "isCorrect": false, "rationale": "Big Data frameworks require gigabytes of resources to successfully initialize software stacks."},
+                {"text": "Allocating a minimum of 4GB of RAM for the virtual machine environment (ideally more).", "isCorrect": true, "rationale": "Hadoop sandboxes run multiple complex services simultaneously, requiring at least 4GB of RAM to prevent memory errors."},
+                {"text": "Disabling 64-bit operating processor compatibility options inside BIOS screens.", "isCorrect": false, "rationale": "Hadoop environments require 64-bit operating architectures to manage large data sets efficiently."},
+                {"text": "Ensuring the computer is completely disconnected from any local power conduit networks.", "isCorrect": false, "rationale": "Computers must have reliable power to run virtualization software and process workloads."}
+              ]
+            }
+          ]
+        };
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            quizData.questions.forEach((q, qIdx) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.setAttribute('data-qidx', qIdx);
+
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.innerText = q.questionNumber + ". " + q.question;
+                card.appendChild(qText);
+
+                const optsList = document.createElement('ul');
+                optsList.className = 'options-list';
+
+                q.answerOptions.forEach((opt, oIdx) => {
+                    const li = document.createElement('li');
+                    li.className = 'option-item';
+                    li.innerText = opt.text;
+                    li.onclick = () => selectOption(qIdx, oIdx, li);
+                    optsList.appendChild(li);
+                });
+
+                card.appendChild(optsList);
+
+                const ratBox = document.createElement('div');
+                ratBox.className = 'rationale';
+                ratBox.id = `rat-${qIdx}`;
+                card.appendChild(ratBox);
+
+                container.appendChild(card);
+            });
+        }
+
+        let selections = {};
+
+        function selectOption(qIdx, oIdx, element) {
+            const card = document.querySelector(`[data-qidx="${qIdx}"]`);
+            card.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selections[qIdx] = oIdx;
+        }
+
+        function gradeQuiz() {
+            let correctCount = 0;
+            quizData.questions.forEach((q, qIdx) => {
+                const ratBox = document.getElementById(`rat-${qIdx}`);
+                const selectedOIdx = selections[qIdx];
+                
+                if (selectedOIdx === undefined) {
+                    ratBox.className = 'rationale incorrect';
+                    ratBox.innerHTML = '<strong>Not Answered.</strong> Please pick an choice option to grade.';
+                    ratBox.style.display = 'block';
+                    return;
+                }
+
+                const chosenOpt = q.answerOptions[selectedOIdx];
+                const correctOptIndex = q.answerOptions.findIndex(o => o.isCorrect);
+                const correctOpt = q.answerOptions[correctOptIndex];
+
+                if (chosenOpt.isCorrect) {
+                    correctCount++;
+                    ratBox.className = 'rationale correct';
+                    ratBox.innerHTML = '<strong>Correct!</strong> ' + chosenOpt.rationale;
+                } else {
+                    ratBox.className = 'rationale incorrect';
+                    ratBox.innerHTML = '<strong>Incorrect.</strong> You selected: "' + chosenOpt.text + '". <br><em>Correct Answer:</em> <strong>' + correctOpt.text + '</strong> — ' + correctOpt.rationale;
+                }
+                ratBox.style.display = 'block';
+            });
+
+            const scoreBanner = document.getElementById('scoreBanner');
+            scoreBanner.innerText = `Quiz Complete! Your Score: ${correctCount} / ${quizData.questions.length} (${Math.round((correctCount/quizData.questions.length)*100)}%)`;
+            scoreBanner.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>
