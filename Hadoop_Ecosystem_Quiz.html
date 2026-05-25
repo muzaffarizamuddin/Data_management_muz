@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadoop Ecosystem Comprehensive Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --primary-color: #0284c7; /* Sky/Ocean Theme for Hadoop */
+            --primary-hover: #0369a1;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --correct-color: #10b981;
+            --incorrect-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .quiz-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .badge {
+            background-color: #e0f2fe;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 10px 0 5px 0;
+            font-weight: 800;
+        }
+
+        .description {
+            color: #475569;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .score-summary {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .option-item:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.1);
+        }
+
+        /* Live Feedback States */
+        .option-item.correct {
+            background-color: #ecfdf5 !important;
+            border-color: var(--correct-color) !important;
+            color: #065f46;
+            font-weight: 500;
+        }
+
+        .option-item.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: var(--incorrect-color) !important;
+            color: #991b1b;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <header>
+        <span class="badge">Module 04: Big Data Frameworks</span>
+        <h1>Hadoop Ecosystem Practice Quiz</h1>
+        <p class="description">Test your knowledge on core components, syntax, system requirements, and platform rules.</p>
+    </header>
+
+    <div class="score-summary" id="scoreSummary">
+        Score: 0 / 25 answered correctly
+    </div>
+
+    <div class="question-card" id="q1-card">
+        <p class="question-text">1. Which of the following describes the fundamental goal of the Hadoop ecosystem?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q1" value="A"> A) Managing local file systems efficiently on a isolated computer workstation.</label>
+            <label class="option-item"><input type="radio" name="q1" value="B"> B) Transforming and analyzing massive datasets across a distributed cluster of computers.</label>
+            <label class="option-item"><input type="radio" name="q1" value="C"> C) Providing purely relational SQL-only instances for transaction processing databases.</label>
+            <label class="option-item"><input type="radio" name="q1" value="D"> D) Designing network routing configurations exclusively for microservice applications.</label>
+        </div>
+        <div class="explanation" id="ex1"><strong>Explanation:</strong> Hadoop is a powerful framework engineered specifically to store, process, and analyze enormous data volumes linearly across a group or cluster of multiple servers.</div>
+    </div>
+
+    <div class="question-card" id="q2-card">
+        <p class="question-text">2. What is the minimum recommended RAM allocation required for running the virtual machine environment during Hadoop configuration installations?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q2" value="A"> A) 1 GB</label>
+            <label class="option-item"><input type="radio" name="q2" value="B"> B) 2 GB</label>
+            <label class="option-item"><input type="radio" name="q2" value="C"> C) 4 GB</label>
+            <label class="option-item"><input type="radio" name="q2" value="D"> D) 16 GB</label>
+        </div>
+        <div class="explanation" id="ex2"><strong>Explanation:</strong> The deployment notes establish that running the setup virtual environments requires a 64-bit host system containing at least 4GB of RAM for the sandbox.</div>
+    </div>
+
+    <div class="question-card" id="q3-card">
+        <p class="question-text">3. What functionality does the Hortonworks Data Platform (HDP) Sandbox provide to developers?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q3" value="A"> A) An administrative billing console monitoring operational infrastructure expenses.</label>
+            <label class="option-item"><input type="radio" name="q3" value="B"> B) A real-time data streaming firewall used exclusively to detect external network intruders.</label>
+            <label class="option-item"><input type="radio" name="q3" value="C"> C) A preconfigured virtual environment to safely explore, learn, and test ecosystem features.</label>
+            <label class="option-item"><input type="radio" name="q3" value="D"> D) An automated code compilation IDE used primarily to construct native iOS user interfaces.</label>
+        </div>
+        <div class="explanation" id="ex3"><strong>Explanation:</strong> HDP Sandboxes are preconfigured setups designed for isolated validation, permitting execution without the demanding requirement of setting up full physical clusters.</div>
+    </div>
+
+    <div class="question-card" id="q4-card">
+        <p class="question-text">4. Which service is explicitly defined as an open-source management platform engineered to simplify provisioning, monitoring, and administrative visibility of Hadoop clusters?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q4" value="A"> A) Apache Ambari</label>
+            <label class="option-item"><input type="radio" name="q4" value="B"> B) PuTTY</label>
+            <label class="option-item"><input type="radio" name="q4" value="C"> C) Derby</label>
+            <label class="option-item"><input type="radio" name="q4" value="D"> D) Pig Latin</label>
+        </div>
+        <div class="explanation" id="ex4"><strong>Explanation:</strong> Apache Ambari simplifies configuration adjustments, component statuses, metrics mapping, and standard task orchestration over a web UI interface.</div>
+    </div>
+
+    <div class="question-card" id="q5-card">
+        <p class="question-text">5. Under a standard local network sandbox deployment, which default address address is typed into a web browser to launch Apache Ambari Dashboard?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q5" value="A"> A) http://localhost:8080</label>
+            <label class="option-item"><input type="radio" name="q5" value="B"> B) http://localhost:1080</label>
+            <label class="option-item"><input type="radio" name="q5" value="C"> C) http://localhost:2222</label>
+            <label class="option-item"><input type="radio" name="q5" value="D"> D) http://127.0.0.1:22</label>
+        </div>
+        <div class="explanation" id="ex5"><strong>Explanation:</strong> To connect and track cluster details through Apache Ambari, users route connection requests through http://localhost:1080.</div>
+    </div>
+
+    <div class="question-card" id="q6-card">
+        <p class="question-text">6. When configuring custom terminal client utilities such as PuTTY to establish secure shell access to a virtual environment, what default port must be explicitly specified?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q6" value="A"> A) 22</label>
+            <label class="option-item"><input type="radio" name="q6" value="B"> B) 80</label>
+            <label class="option-item"><input type="radio" name="q6" value="C"> C) 1080</label>
+            <label class="option-item"><input type="radio" name="q6" value="D"> D) 2222</label>
+        </div>
+        <div class="explanation" id="ex6"><strong>Explanation:</strong> While typical SSH functions resolve on port 22, the specific documentation sets port 2222 to connect directly with the mapped sandbox environment.</div>
+    </div>
+
+    <div class="question-card" id="q7-card">
+        <p class="question-text">7. Which foundational storage concept published by Google served as the principal inspiration and model for creating the Hadoop Distributed File System (HDFS)?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q7" value="A"> A) Google Cloud Spanner</label>
+            <label class="option-item"><input type="radio" name="q7" value="B"> B) Google File System (GFS)</label>
+            <label class="option-item"><input type="radio" name="q7" value="C"> C) Bigtable architecture</label>
+            <label class="option-item"><input type="radio" name="q7" value="D"> D) Google Drive API</label>
+        </div>
+        <div class="explanation" id="ex7"><strong>Explanation:</strong> Google's early whitepapers outlining their proprietary Distributed File System (GFS) directly inspired the architectural tenets behind standard open-source HDFS.</div>
+    </div>
+
+    <div class="question-card" id="q8-card">
+        <p class="question-text">8. What terminal syntax command is utilized to list out all files and paths present inside the Hadoop cluster root directory structure?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q8" value="A"> A) hadoop fs -ls</label>
+            <label class="option-item"><input type="radio" name="q8" value="B"> B) hadoop fs -mkdir</label>
+            <label class="option-item"><input type="radio" name="q8" value="C"> C) wget path/to/file</label>
+            <label class="option-item"><input type="radio" name="q8" value="D"> D) hadoop fs -copyFromLocal</label>
+        </div>
+        <div class="explanation" id="ex8"><strong>Explanation:</strong> Appending `-ls` directly to the `hadoop fs` syntax triggers directory inspections mirroring similar Unix filesystem layout logic.</div>
+    </div>
+
+    <div class="question-card" id="q9-card">
+        <p class="question-text">9. If a developer wishes to upload a local configuration data sheet named 'u.data' directly into a cluster pathway folder named 'ml-100k', which specific command string must they pass?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q9" value="A"> A) hadoop fs -rm ml-100k/u.data</label>
+            <label class="option-item"><input type="radio" name="q9" value="B"> B) hadoop fs -copyFromLocal u.data ml-100k/u.data</label>
+            <label class="option-item"><input type="radio" name="q9" value="C"> C) wget http://u.data ml-100k</label>
+            <label class="option-item"><input type="radio" name="q9" value="D"> D) hadoop fs -mkdir u.data</label>
+        </div>
+        <div class="explanation" id="ex9"><strong>Explanation:</strong> The parameter directive `-copyFromLocal` tells the client to look at standard local disk space and stream the chosen file asset directly up into the active cluster.</div>
+    </div>
+
+    <div class="question-card" id="q10-card">
+        <p class="question-text">10. What does the operational acronym ETL stand for within data pipeline practices?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q10" value="A"> A) Encrypt, Target, Lock</label>
+            <label class="option-item"><input type="radio" name="q10" value="B"> B) Extract, Transform, Load</label>
+            <label class="option-item"><input type="radio" name="q10" value="C"> C) Execute, Transfer, Log</label>
+            <label class="option-item"><input type="radio" name="q10" value="D"> D) Estimate, Truncate, Locate</label>
+        </div>
+        <div class="explanation" id="ex10"><strong>Explanation:</strong> ETL defines the process workflow of retrieving data out of random source systems, transforming raw files to meet analytics criteria, and loading them into target storage warehouses.</div>
+    </div>
+
+    <div class="question-card" id="q11-card">
+        <p class="question-text">11. What engine or database system is pre-configured by default within Apache Hive to maintain metadata storage configurations (the Metastore)?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q11" value="A"> A) PostgreSQL</label>
+            <label class="option-item"><input type="radio" name="q11" value="B"> B) MongoDB</label>
+            <label class="option-item"><input type="radio" name="q11" value="C"> C) Derby</label>
+            <label class="option-item"><input type="radio" name="q11" value="D"> D) Cassandra</label>
+        </div>
+        <div class="explanation" id="ex11"><strong>Explanation:</strong> Out of the box, Apache Hive sets up an integrated embedded database instance called Derby to preserve relational database schemas mapping metadata locations.</div>
+    </div>
+
+    <div class="question-card" id="q12-card">
+        <p class="question-text">12. According to standard database naming conventions covered in the material, how should tables and fields ideally be structured?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q12" value="A"> A) Table names in uppercase plural; fields in uppercase camelCase.</label>
+            <label class="option-item"><input type="radio" name="q12" value="B"> B) Table names in lowercase plural; fields in lowercase singular form.</label>
+            <label class="option-item"><input type="radio" name="q12" value="C"> C) Table names in singular snake_case; fields in plural camelCase.</label>
+            <label class="option-item"><input type="radio" name="q12" value="D"> D) Table names must contain alphanumeric values matching the host VM server name.</label>
+        </div>
+        <div class="explanation" id="ex12"><strong>Explanation:</strong> The framework housekeeping instructions mandate keeping table collections labeled in lowercased plural terms while specific individual field metrics stay lowercased singular.</div>
+    </div>
+
+    <div class="question-card" id="q13-card">
+        <p class="question-text">13. Which software platform component was originally created and engineered by Facebook before transitioning into open-source status?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q13" value="A"> A) Apache Pig</label>
+            <label class="option-item"><input type="radio" name="q13" value="B"> B) Apache Hive</label>
+            <label class="option-item"><input type="radio" name="q13" value="C"> C) VirtualBox Manager</label>
+            <label class="option-item"><input type="radio" name="q13" value="D"> D) Apache Ambari Agent</label>
+        </div>
+        <div class="explanation" id="ex13"><strong>Explanation:</strong> Engineers at Facebook initially built Apache Hive to bridge data abstraction requirements, translating structured declarative requests over traditional flat files.</div>
+    </div>
+
+    <div class="question-card" id="q14-card">
+        <p class="question-text">14. What language is native to Apache Pig for transforming and processing high-level logic over MapReduce pipelines?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q14" value="A"> A) PigQL</label>
+            <label class="option-item"><input type="radio" name="q14" value="B"> B) Pig Latin</label>
+            <label class="option-item"><input type="radio" name="q14" value="C"> C) HiveQL</label>
+            <label class="option-item"><input type="radio" name="q14" value="D"> D) Distributed SQL</label>
+        </div>
+        <div class="explanation" id="ex14"><strong>Explanation:</strong> Apache Pig relies on Pig Latin, a structural notation providing clear workflow sequencing and transforming complex raw structures systematically.</div>
+    </div>
+
+    <div class="question-card" id="q15-card">
+        <p class="question-text">15. What corporate entity initially developed Apache Pig, observing up to 40% of its data execution workloads running on this system framework?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q15" value="A"> A) Facebook</label>
+            <label class="option-item"><input type="radio" name="q15" value="B"> B) Google</label>
+            <label class="option-item"><input type="radio" name="q15" value="C"> C) Yahoo!</label>
+            <label class="option-item"><input type="radio" name="q15" value="D"> D) Twitter</label>
+        </div>
+        <div class="explanation" id="ex15"><strong>Explanation:</strong> Yahoo! engineers pioneered Apache Pig to easily construct intense data manipulation passes without typing extensive multi-line Java classes manually.</div>
+    </div>
+
+    <div class="question-card" id="q16-card">
+        <p class="question-text">16. Which data professional profile is primarily aligned with using Apache Hive, according to industry specialization notes?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q16" value="A"> A) Systems Research Scientists</label>
+            <label class="option-item"><input type="radio" name="q16" value="B"> B) Core Systems Firmware Programmers</label>
+            <label class="option-item"><input type="radio" name="q16" value="C"> C) Business Data Analysts</label>
+            <label class="option-item"><input type="radio" name="q16" value="D"> D) Cybersecurity Incident Investigators</label>
+        </div>
+        <div class="explanation" id="ex16"><strong>Explanation:</strong> Because Hive uses familiar declarative SQL-style structure models, it is predominantly standard practice tool selection for business analytics and data analysts.</div>
+    </div>
+
+    <div class="question-card" id="q17-card">
+        <p class="question-text">17. In terms of data flexibility, which type of structures are typically assigned to Apache Hive versus Apache Pig?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q17" value="A"> A) Hive is used for unstructured media streams; Pig is used for schema-only rows.</label>
+            <label class="option-item"><input type="radio" name="q17" value="B"> B) Hive is used for completely structured tabular data; Pig handles semi-structured data datasets.</label>
+            <label class="option-item"><input type="radio" name="q17" value="C"> C) Hive is used for temporary cache; Pig operates exclusively on local configuration profiles.</label>
+            <label class="option-item"><input type="radio" name="q17" value="D"> D) Both components perform uniformly across relational file indexes without distinctions.</label>
+        </div>
+        <div class="explanation" id="ex17"><strong>Explanation:</strong> Hive models strict operational structure onto storage grids, whereas Pig offers pipeline versatility to interpret varying unstructured or semi-structured schemas.</div>
+    </div>
+
+    <div class="question-card" id="q18-card">
+        <p class="question-text">18. To sort information results via an active Hive query configuration sequence, which statement clause syntax is specified?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q18" value="A"> A) GROUP BY</label>
+            <label class="option-item"><input type="radio" name="q18" value="B"> B) ORDER BY</label>
+            <label class="option-item"><input type="radio" name="q18" value="C"> C) WHERE CONDITION</label>
+            <label class="option-item"><input type="radio" name="q18" value="D"> D) ALIAS SORT</label>
+        </div>
+        <div class="explanation" id="ex18"><strong>Explanation:</strong> The instructions detail that `ORDER BY` filters and positions tracking rows returned out of selected datasets in either ascending or descending modes.</div>
+    </div>
+
+    <div class="question-card" id="q19-card">
+        <p class="question-text">19. If you execute an 'ORDER BY column_name' filter query without appending any explicit sort modifiers, what ordering arrangement occurs by default?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q19" value="A"> A) Descending alignment order</label>
+            <label class="option-item"><input type="radio" name="q19" value="B"> B) Randomized distribution order</label>
+            <label class="option-item"><input type="radio" name="q19" value="C"> C) Ascending alignment order</label>
+            <label class="option-item"><input type="radio" name="q19" value="D"> D) Alphabetical grouping by file block address metadata</label>
+        </div>
+        <div class="explanation" id="ex19"><strong>Explanation:</strong> Hive architecture queries configure sorted data listings using standard ascending ranking unless explicitly told to swap directions using the `DESC` keyword.</div>
+    </div>
+
+    <div class="question-card" id="q20-card">
+        <p class="question-text">20. What syntax argument statement resolves aggregation operations to partition record items into collections sorted by chosen properties?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q20" value="A"> A) ORDER BY</label>
+            <label class="option-item"><input type="radio" name="q20" value="B"> B) WHERE</label>
+            <label class="option-item"><input type="radio" name="q20" value="C"> C) GROUP BY</label>
+            <label class="option-item"><input type="radio" name="q20" value="D"> D) SELECT DISTINCT</label>
+        </div>
+        <div class="explanation" id="ex20"><strong>Explanation:</strong> `GROUP BY` collects duplicate instance markers across a database column, making it ideal to run summary evaluations like counts or value totals.</div>
+    </div>
+
+    <div class="question-card" id="q21-card">
+        <p class="question-text">21. What component represents the specialized interactive shell utility where custom Apache Pig script logic commands are executed locally?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q21" value="A"> A) HiveQL Compiler</label>
+            <label class="option-item"><input type="radio" name="q21" value="B"> B) Grunt Shell</label>
+            <label class="option-item"><input type="radio" name="q21" value="C"> C) Ambari Dashboard</label>
+            <label class="option-item"><input type="radio" name="q21" value="D"> D) PuTTY SSH Port</label>
+        </div>
+        <div class="explanation" id="ex21"><strong>Explanation:</strong> Interactive or step-by-step evaluation runs of Pig Latin routines are launched within the proprietary command ecosystem terminal interface named Grunt.</div>
+    </div>
+
+    <div class="question-card" id="q22-card">
+        <p class="question-text">22. What underlying subsystem architectural element manages job tracking, work allocation, and computation scheduling across a configured cluster environment?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q22" value="A"> A) HDFS Storage blocks</label>
+            <label class="option-item"><input type="radio" name="q22" value="B"> B) YARN (Yet Another Resource Negotiator)</label>
+            <label class="option-item"><input type="radio" name="q22" value="C"> C) PuTTY configuration profiles</label>
+            <label class="option-item"><input type="radio" name="q22" value="D"> D) Oracle VM VirtualBox Hypervisor</label>
+        </div>
+        <div class="explanation" id="ex22"><strong>Explanation:</strong> YARN is standard resource manager orchestration layer component, controlling cluster utilization balancing metrics systematically.</div>
+    </div>
+
+    <div class="question-card" id="q23-card">
+        <p class="question-text">23. In the context of API system communication patterns, what functional action map translates to creating or appending a new object asset item to a target location server repository?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q23" value="A"> A) GET</label>
+            <label class="option-item"><input type="radio" name="q23" value="B"> B) PUT</label>
+            <label class="option-item"><input type="radio" name="q23" value="C"> C) POST</label>
+            <label class="option-item"><input type="radio" name="q23" value="D"> D) DELETE</label>
+        </div>
+        <div class="explanation" id="ex23"><strong>Explanation:</strong> Under standard REST rules, a POST request delivers fresh instance payload structures to insert new record entities.</div>
+    </div>
+
+    <div class="question-card" id="q24-card">
+        <p class="question-text">24. What primary limitation dictates scale management inside standard Apache Ambari visualization interfaces?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q24" value="A"> A) The total data volume capacity the host setup can physically manage.</label>
+            <label class="option-item"><input type="radio" name="q24" value="B"> B) The operating network platform variant version licensing constraints.</label>
+            <label class="option-item"><input type="radio" name="q24" value="C"> C) The unique language restrictions imposed by basic JSON data transfers.</label>
+            <label class="option-item"><input type="radio" name="q24" value="D"> D) The availability of open-source terminal updates for PuTTY sessions.</label>
+        </div>
+        <div class="explanation" id="ex24"><strong>Explanation:</strong> The course notes indicate that regardless of whether executing across single nodes or a massive grid, the absolute limiting factor narrows down to data density handling thresholds.</div>
+    </div>
+
+    <div class="question-card" id="q25-card">
+        <p class="question-text">25. Why is a standard relational SQL database engine fundamentally different from Hive query operations running under the hood?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q25" value="A"> A) Hive executes relational sequences strictly inside primary memory caching pools.</label>
+            <label class="option-item"><input type="radio" name="q25" value="B"> B) Hive translates statements into a completely distributed MapReduce manner over clusters.</label>
+            <label class="option-item"><input type="radio" name="q25" value="C"> C) Standard database models lack support for structural uppercase table definitions.</label>
+            <label class="option-item"><input type="radio" name="q25" value="D"> D) Hive completely disallows any filtering operations via WHERE command patterns.</label>
+        </div>
+        <div class="explanation" id="ex25"><strong>Explanation:</strong> Although HiveQL looks like standard SQL syntax, it handles big data in a distributed architecture manner optimized across multi-server layouts instead of a single server engine.</div>
+    </div>
+
+</div>
+
+<script>
+    // Configuration dictionary detailing correct answers for validation logic evaluation
+    const solutions = {
+        q1: 'B', q2: 'C', q3: 'C', q4: 'A', q5: 'B',
+        q6: 'D', q7: 'B', q8: 'A', q9: 'B', q10: 'B',
+        q11: 'C', q12: 'B', q13: 'B', q14: 'B', q15: 'C',
+        q16: 'C', q17: 'B', q18: 'B', q19: 'C', q20: 'C',
+        q21: 'B', q22: 'B', q23: 'C', q24: 'A', q25: 'B'
+    };
+
+    let points = {};
+    const summaryDisplay = document.getElementById('scoreSummary');
+
+    function updateScoreSummary() {
+        const totalIdentified = Object.keys(points).length;
+        const totalCorrectAnswers = Object.values(points).reduce((acc, curr) => acc + curr, 0);
+        summaryDisplay.textContent = `Score: ${totalCorrectAnswers} / 25 correct (${totalIdentified} attempted)`;
+    }
+
+    // Attach immediate interactive review events to all answer options
+    document.querySelectorAll('.option-item input[type="radio"]').forEach(element => {
+        element.addEventListener('change', function() {
+            const currentQuestionId = this.name; 
+            const chosenOptionValue = this.value;
+            const validSolutionValue = solutions[currentQuestionId];
+            
+            const parentBlock = document.getElementById(currentQuestionId + '-card');
+            const sisterLabels = parentBlock.querySelectorAll('.option-item');
+            const targetExplanation = document.getElementById('ex' + currentQuestionId.slice(1));
+
+            // Clean previous checking styling rules
+            sisterLabels.forEach(lbl => {
+                lbl.classList.remove('correct', 'incorrect');
+            });
+
+            // Evaluate answer logic condition
+            if (chosenOptionValue === validSolutionValue) {
+                this.parentElement.classList.add('correct');
+                points[currentQuestionId] = 1;
+            } else {
+                this.parentElement.classList.add('incorrect');
+                points[currentQuestionId] = 0;
+
+                // Emphasize correct answer option as instantaneous learning feedback
+                sisterLabels.forEach(lbl => {
+                    if (lbl.querySelector('input').value === validSolutionValue) {
+                        lbl.classList.add('correct');
+                    }
+                });
+            }
+
+            // Expose background reasoning context text
+            targetExplanation.style.display = 'block';
+            updateScoreSummary();
+        });
+    });
+</script>
+
+</body>
+</html>
