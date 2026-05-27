@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Spark Comprehensive Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --primary-color: #e25c00; /* Spark Orange Theme */
+            --primary-hover: #b44600;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --correct-color: #10b981;
+            --incorrect-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .quiz-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .badge {
+            background-color: #ffedd5;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 10px 0 5px 0;
+            font-weight: 800;
+        }
+
+        .description {
+            color: #475569;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .score-summary {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .option-item:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.1);
+        }
+
+        /* Live Feedback States */
+        .option-item.correct {
+            background-color: #ecfdf5 !important;
+            border-color: var(--correct-color) !important;
+            color: #065f46;
+            font-weight: 500;
+        }
+
+        .option-item.incorrect {
+            background-color: #fef2f2 !important;
+            border-color: var(--incorrect-color) !important;
+            color: #991b1b;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <header>
+        <span class="badge">Module 04: Spark Ecosystem</span>
+        <h1>Apache Spark Practice Quiz</h1>
+        <p class="description">Test your knowledge on core components, architecture, RDDs, DataFrames, Spark SQL, and deployment configurations.</p>
+    </header>
+
+    <div class="score-summary" id="scoreSummary">
+        Score: 0 / 30 answered correctly
+    </div>
+
+    <div class="question-card" id="q1-card">
+        <p class="question-text">1. How does spark.apache.org officially define Apache Spark?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q1" value="A"> A) A hardware architecture designed for processing raw disk block storage arrays.</label>
+            <label class="option-item"><input type="radio" name="q1" value="B"> B) A multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters.</label>
+            <label class="option-item"><input type="radio" name="q1" value="C"> C) A lightweight web application engine built for deploying low-latency JavaScript single-page sites.</label>
+            <label class="option-item"><input type="radio" name="q1" value="D"> D) A proprietary storage virtualization software used exclusively on relational mainframe networks.</label>
+        </div>
+        <div class="explanation" id="ex1"><strong>Explanation:</strong> Spark is an open-source, multi-language processing engine capable of running data engineering and data science workloads on localized hosts or distributed clusters.</div>
+    </div>
+
+    <div class="question-card" id="q2-card">
+        <p class="question-text">2. Compared to disk-bound frameworks like Pig or Hive, what type of tasks does Apache Spark make easier to execute?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q2" value="A"> A) Static single-machine relational schema migrations.</label>
+            <label class="option-item"><input type="radio" name="q2" value="B"> B) Complex tasks like machine learning, data mining, graph analysis, and streaming data.</label>
+            <label class="option-item"><input type="radio" name="q2" value="C"> C) Basic network packet routing configuration adjustments.</label>
+            <label class="option-item"><input type="radio" name="q2" value="D"> D) Scripted file backups on standalone operating systems.</label>
+        </div>
+        <div class="explanation" id="ex2"><strong>Explanation:</strong> Spark's functional design enables advanced computational pipelines including machine learning, graph theory execution, data mining, and real-time streaming workflows.</div>
+    </div>
+
+    <div class="question-card" id="q3-card">
+        <p class="question-text">3. In the architectural topology of a Spark cluster, what component holds the script that controls what happens with the job?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q3" value="A"> A) Task Worker Node</label>
+            <label class="option-item"><input type="radio" name="q3" value="B"> B) Driver Program</label>
+            <label class="option-item"><input type="radio" name="q3" value="C"> C) NameNode Metastore</label>
+            <label class="option-item"><input type="radio" name="q3" value="D"> D) Ambari Console Dashboard</label>
+        </div>
+        <div class="explanation" id="ex3"><strong>Explanation:</strong> The Driver Program hosts the principal workflow execution script and initializes the execution environment controlling active data jobs.</div>
+    </div>
+
+    <div class="question-card" id="q4-card">
+        <p class="question-text">4. Which cluster managers can be utilized by Spark to distribute jobs across an entire cluster of commodity computers?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q4" value="A"> A) Apache Ambari and PuTTY</label>
+            <label class="option-item"><input type="radio" name="q4" value="B"> B) Spark (Standalone) or YARN</label>
+            <label class="option-item"><input type="radio" name="q4" value="C"> C) Oracle VirtualBox Hypervisor</label>
+            <label class="option-item"><input type="radio" name="q4" value="D"> D) HiveContext and SQLContext</label>
+        </div>
+        <div class="explanation" id="ex4"><strong>Explanation:</strong> Spark uses cluster resource negotiators like its built-in Standalone Spark manager or Hadoop YARN to balance data processing pipelines across compute nodes.</div>
+    </div>
+
+    <div class="question-card" id="q5-card">
+        <p class="question-text">5. What element inside each distributed cluster Executor is highlighted as the primary key to Spark's exceptional execution performance?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q5" value="A"> A) Disk storage arrays</label>
+            <label class="option-item"><input type="radio" name="q5" value="B"> B) The Cache (RAM retention)</label>
+            <label class="option-item"><input type="radio" name="q5" value="C"> C) The log4j config profile</label>
+            <label class="option-item"><input type="radio" name="q5" value="D"> D) Ambari admin password properties</label>
+        </div>
+        <div class="explanation" id="ex5"><strong>Explanation:</strong> Spark is fundamentally a memory-based solution that attempts to preserve as much operational information in RAM cache as possible, circumventing slow disk-bound processing bottleneck loops.</div>
+    </div>
+
+    <div class="question-card" id="q6-card">
+        <p class="question-text">6. How much faster can Apache Spark run programs compared to traditional Hadoop MapReduce when processing in-memory?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q6" value="A"> A) Up to 2x faster</label>
+            <label class="option-item"><input type="radio" name="q6" value="B"> B) Up to 10x faster</label>
+            <label class="option-item"><input type="radio" name="q6" value="C"> C) Up to 100x faster</label>
+            <label class="option-item"><input type="radio" name="q6" value="D"> D) Up to 1000x faster</label>
+        </div>
+        <div class="explanation" id="ex6"><strong>Explanation:</strong> Spark documentation notes that its in-memory computing architecture can perform up to 100x faster than traditional MapReduce engines.</div>
+    </div>
+
+    <div class="question-card" id="q7-card">
+        <p class="question-text">7. When Spark runs data operations on disk instead of memory, what is its expected speed advantage over Hadoop MapReduce?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q7" value="A"> A) 2x faster</label>
+            <label class="option-item"><input type="radio" name="q7" value="B"> B) 10x faster</label>
+            <label class="option-item"><input type="radio" name="q7" value="C"> C) 50x faster</label>
+            <label class="option-item"><input type="radio" name="q7" value="D"> D) They run at the exact same speed on disk</label>
+        </div>
+        <div class="explanation" id="ex7"><strong>Explanation:</strong> Even when forced to write intermediate structures out onto flat storage disks, Spark remains up to 10x faster than MapReduce due to advanced execution graphs.</div>
+    </div>
+
+    <div class="question-card" id="q8-card">
+        <p class="question-text">8. What engine model optimizes workflows inside Apache Spark by working backward from the end result to figure out the fastest pathway?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q8" value="A"> A) Relational Metastore Engine</label>
+            <label class="option-item"><input type="radio" name="q8" value="B"> B) DAG Engine (Directed Acyclic Graph)</label>
+            <label class="option-item"><input type="radio" name="q8" value="C"> C) Local Terminal Ambari Client</label>
+            <label class="option-item"><input type="radio" name="q8" value="D"> D) Linear Disk Storage Driver</label>
+        </div>
+        <div class="explanation" id="ex8"><strong>Explanation:</strong> Spark uses a DAG (Directed Acyclic Graph) engine to optimize data workflow routines, map dependencies, and trace the most performant pipeline before execution.</div>
+    </div>
+
+    <div class="question-card" id="q9-card">
+        <p class="question-text">9. Which programming languages can be utilized to author functional pipeline code inside Apache Spark?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q9" value="A"> A) PHP, HTML, and CSS</label>
+            <label class="option-item"><input type="radio" name="q9" value="B"> B) Python, Java, or Scala</label>
+            <label class="option-item"><input type="radio" name="q9" value="C"> C) Pig Latin, HiveQL, and Grunt Shell</label>
+            <label class="option-item"><input type="radio" name="q9" value="D"> D) Bash script and PuTTY configurations</label>
+        </div>
+        <div class="explanation" id="ex9"><strong>Explanation:</strong> Developers can interface natively with Apache Spark by deploying script files written in Python, Java, or Scala.</div>
+    </div>
+
+    <div class="question-card" id="q10-card">
+        <p class="question-text">10. What does the foundational architectural concept "RDD" stand for within Spark development ecosystems?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q10" value="A"> A) Relational Distributed Database</label>
+            <label class="option-item"><input type="radio" name="q10" value="B"> B) Resilient Distributed Dataset</label>
+            <label class="option-item"><input type="radio" name="q10" value="C"> C) Redundant Disk Directory</label>
+            <label class="option-item"><input type="radio" name="q10" value="D"> D) Recovery Data Dependency</label>
+        </div>
+        <div class="explanation" id="ex10"><strong>Explanation:</strong> The Resilient Distributed Dataset (RDD) is the fundamental data abstraction concept representing an immutable, partitioned collection of records processed in parallel.</div>
+    </div>
+
+    <div class="question-card" id="q11-card">
+        <p class="question-text">11. How does an RDD achieve its "Resilient" characteristic for automatic fault recovery?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q11" value="A"> A) By mirroring raw physical block copies across hidden backup partitions.</label>
+            <label class="option-item"><input type="radio" name="q11" value="B"> B) By using lineage information (the sequence of transformations recorded during its creation).</label>
+            <label class="option-item"><input type="radio" name="q11" value="C"> C) By forcing the system to store all operational records on local disk space immediately.</label>
+            <label class="option-item"><input type="radio" name="q11" value="D"> D) By prompting administrator root users to re-submit scripts via terminal environments.</label>
+        </div>
+        <div class="explanation" id="ex11"><strong>Explanation:</strong> RDDs achieve resilience by recording a graph lineage of historical transformations, allowing any lost data partition to be rebuilt dynamically if a node fails.</div>
+    </div>
+
+    <div class="question-card" id="q12-card">
+        <p class="question-text">12. What does it mean for an RDD to be "Immutable"?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q12" value="A"> A) It can only process numeric value inputs.</label>
+            <label class="option-item"><input type="radio" name="q12" value="B"> B) Content cannot be changed once created.</label>
+            <label class="option-item"><input type="radio" name="q12" value="C"> C) It automatically scales down cluster nodes to minimize server RAM footprint.</label>
+            <label class="option-item"><input type="radio" name="q12" value="D"> D) Its structured columnar schemas cannot accept traditional strings.</label>
+        </div>
+        <div class="explanation" id="ex12"><strong>Explanation:</strong> Immutability dictates that an RDD's contents cannot be modified; transformations derive new RDDs while preserving the source datasets intact.</div>
+    </div>
+
+    <div class="question-card" id="q13-card">
+        <p class="question-text">13. Which of the following defines the concept of "Lazy Evaluation" in Apache Spark RDD transformations?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q13" value="A"> A) Processes run slower due to missing infrastructure nodes.</label>
+            <label class="option-item"><input type="radio" name="q13" value="B"> B) Computations are delayed and transformations are not computed immediately until an action is called.</label>
+            <label class="option-item"><input type="radio" name="q13" value="C"> C) Low-level functional scripts fail to compile until execution parameters are hardcoded.</label>
+            <label class="option-item"><input type="radio" name="q13" value="D"> D) The Spark context delegates all analytical resource scaling to the Ambari client.</label>
+        </div>
+        <div class="explanation" id="ex13"><strong>Explanation:</strong> Lazy evaluation defers physical computation execution until an action is explicitly requested. This allows the DAG optimizer to construct efficient end-to-end plan sequences.</div>
+    </div>
+
+    <div class="question-card" id="q14-card">
+        <p class="question-text">14. When evaluating RDDs versus DataFrames, how do their levels of abstraction differ?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q14" value="A"> A) RDDs use high-level structured arrays; DataFrames operate near raw machine code registers.</label>
+            <label class="option-item"><input type="radio" name="q14" value="B"> B) RDDs are low-level (closer to raw data); DataFrames are high-level (like structured SQL tables).</label>
+            <label class="option-item"><input type="radio" name="q14" value="C"> C) RDDs enforce schema validation metrics; DataFrames possess zero schema capabilities.</label>
+            <label class="option-item"><input type="radio" name="q14" value="D"> D) Both abstractions operate identically across low-level functional blocks.</label>
+        </div>
+        <div class="explanation" id="ex14"><strong>Explanation:</strong> RDDs represent low-level collections lacking built-in tabular schemas, whereas DataFrames are structured, high-level abstractions mapping rows and named columns similar to relational tables.</div>
+    </div>
+
+    <div class="question-card" id="q15-card">
+        <p class="question-text">15. What performance optimization component powers Spark DataFrames, making them faster than low-level RDDs?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q15" value="A"> A) The Grunt compiler pipeline</label>
+            <label class="option-item"><input type="radio" name="q15" value="B"> B) The Catalyst Optimizer and Tungsten engine</label>
+            <label class="option-item"><input type="radio" name="q15" value="C"> C) Local VM RAM virtualization drivers</label>
+            <label class="option-item"><input type="radio" name="q15" value="D"> D) The log4j flat-file categorization subsystem</label>
+        </div>
+        <div class="explanation" id="ex15"><strong>Explanation:</strong> DataFrames achieve superior execution speeds over basic RDDs by routing queries through the built-in Catalyst Optimizer and Tungsten memory layout engine.</div>
+    </div>
+
+    <div class="question-card" id="q16-card">
+        <p class="question-text">16. What structural characteristic differentiates a Spark DataFrame from a basic RDD dataset?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q16" value="A"> A) RDDs contain columns with types; DataFrames represent object collections without indexes.</label>
+            <label class="option-item"><input type="radio" name="q16" value="B"> B) RDDs have no schema (just a collection of objects); DataFrames are schema-based (columns with types).</label>
+            <label class="option-item"><input type="radio" name="q16" value="C"> C) RDDs can handle machine learning logic; DataFrames can only handle flat string structures.</label>
+            <label class="option-item"><input type="radio" name="q16" value="D"> D) DataFrames require complex multi-line object mapping loops to trace fields.</label>
+        </div>
+        <div class="explanation" id="ex16"><strong>Explanation:</strong> RDDs hold generic objects without an explicit structural schema. DataFrames are structured around named columns with explicit types, enabling relational optimization.</div>
+    </div>
+
+    <div class="question-card" id="q17-card">
+        <p class="question-text">17. Which ecosystem component provides real-time ingestion capabilities within the Spark big data framework?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q17" value="A"> A) Spark SQL</label>
+            <label class="option-item"><input type="radio" name="q17" value="B"> B) GraphX</label>
+            <label class="option-item"><input type="radio" name="q17" value="C"> C) Spark Streaming</label>
+            <label class="option-item"><input type="radio" name="q17" value="D"> D) MLLib</label>
+        </div>
+        <div class="explanation" id="ex17"><strong>Explanation:</strong> Spark Streaming handles continuous high-volume data streams in real time, routing them into the core engine for processing.</div>
+    </div>
+
+    <div class="question-card" id="q18-card">
+        <p class="question-text">18. What specialized library inside the Spark framework is dedicated to machine learning and data mining operations?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q18" value="A"> A) GraphX</label>
+            <label class="option-item"><input type="radio" name="q18" value="B"> B) Spark SQL</label>
+            <label class="option-item"><input type="radio" name="q18" value="C"> C) MLLib</label>
+            <label class="option-item"><input type="radio" name="q18" value="D"> D) SparkContext</label>
+        </div>
+        <div class="explanation" id="ex18"><strong>Explanation:</strong> MLLib is Spark's scalable machine learning library, delivering algorithms for classification, regression, clustering, and collaborative filtering.</div>
+    </div>
+
+    <div class="question-card" id="q19-card">
+        <p class="question-text">19. Which sub-component of the Spark ecosystem provides graph theory algorithms and analysis abstractions?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q19" value="A"> A) MLLib</label>
+            <label class="option-item"><input type="radio" name="q19" value="B"> B) Spark Streaming</label>
+            <label class="option-item"><input type="radio" name="q19" value="C"> C) GraphX</label>
+            <label class="option-item"><input type="radio" name="q19" value="D"> D) HiveContext</label>
+        </div>
+        <div class="explanation" id="ex19"><strong>Explanation:</strong> GraphX introduces structured graph computations and specialized network path operations into the core Spark ecosystem.</div>
+    </div>
+
+    <div class="question-card" id="q20-card">
+        <p class="question-text">20. What is the fundamental running environment and execution entry point within Apache Spark created by the driver program?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q20" value="A"> A) Catalyst Optimizer</label>
+            <label class="option-item"><input type="radio" name="q20" value="B"> B) SparkContext</label>
+            <label class="option-item"><input type="radio" name="q20" value="C"> C) Grunt Terminal Shell</label>
+            <label class="option-item"><input type="radio" name="q20" value="D"> D) Ambari Agent Process</label>
+        </div>
+        <div class="explanation" id="ex20"><strong>Explanation:</strong> The SparkContext acts as the entry point to the framework's core runtime environment, establishing coordination and link connections to the cluster components.</div>
+    </div>
+
+    <div class="question-card" id="q21-card">
+        <p class="question-text">21. What implicit object handle identifier is instantiated automatically when launching an interactive Spark shell connection?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q21" value="A"> A) sctx</label>
+            <label class="option-item"><input type="radio" name="q21" value="B"> B) sc</label>
+            <label class="option-item"><input type="radio" name="q21" value="C"> C) spark_context</label>
+            <label class="option-item"><input type="radio" name="q21" value="D"> D) hiveCtx</label>
+        </div>
+        <div class="explanation" id="ex21"><strong>Explanation:</strong> The interactive command shell environments expose the initialized SparkContext master object reference under the pre-configured variable name 'sc'.</div>
+    </div>
+
+    <div class="question-card" id="q22-card">
+        <p class="question-text">22. When reading paths via a SparkContext method, what do triple forward slashes (file:///...) explicitly indicate to the client engine?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q22" value="A"> A) Files residing on an Amazon S3 storage endpoint.</label>
+            <label class="option-item"><input type="radio" name="q22" value="B"> B) Files distributed on the active cluster's HDFS environment.</label>
+            <label class="option-item"><input type="radio" name="q22" value="C"> C) Files residing on the local filesystem of the node machine.</label>
+            <label class="option-item"><input type="radio" name="q22" value="D"> D) Files parsed securely over an external relational Metastore.</label>
+        </div>
+        <div class="explanation" id="ex22"><strong>Explanation:</strong> The prefix string 'file:///' indicates that the source asset path points directly to a file on the local disk system rather than a distributed storage grid.</div>
+    </div>
+
+    <div class="question-card" id="q23-card">
+        <p class="question-text">23. In PySpark RDD scripting, what mechanism is used to parallelize a raw array list across cluster node structures?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q23" value="A"> A) sc.textFile()</label>
+            <label class="option-item"><input type="radio" name="q23" value="B"> B) sc.parallelize()</label>
+            <label class="option-item"><input type="radio" name="q23" value="C"> C) spark.createDataFrame()</label>
+            <label class="option-item"><input type="radio" name="q23" value="D"> D) hiveContext.sql()</label>
+        </div>
+        <div class="explanation" id="ex23"><strong>Explanation:</strong> The `sc.parallelize()` method accepts a local collection array and breaks it apart into partitioned shards across the cluster nodes.</div>
+    </div>
+
+    <div class="question-card" id="q24-card">
+        <p class="question-text">24. Which of the following represents a valid list of RDD operations categorized explicitly as structural 'Transformations'?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q24" value="A"> A) collect, count, show, mean</label>
+            <label class="option-item"><input type="radio" name="q24" value="B"> B) map, flatmap, filter, distinct</label>
+            <label class="option-item"><input type="radio" name="q24" value="C"> C) save, print, write, submit</label>
+            <label class="option-item"><input type="radio" name="q24" value="D"> D) parallelize, reset, root, su</label>
+        </div>
+        <div class="explanation" id="ex24"><strong>Explanation:</strong> Transformations include lazy actions such as `map`, `flatmap`, `filter`, and `distinct` which assemble new RDD structures without triggering execution immediately.</div>
+    </div>
+
+    <div class="question-card" id="q25-card">
+        <p class="question-text">25. What code syntax demonstrates a standard transformation mapping values to their squares using an inline Python lambda function?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q25" value="A"> A) rdd.filter(df.age > 30)</label>
+            <label class="option-item"><input type="radio" name="q25" value="B"> B) rdd.map(lambda x: x*x)</label>
+            <label class="option-item"><input type="radio" name="q25" value="C"> C) myResultDataFrame.groupBy("age").mean()</label>
+            <label class="option-item"><input type="radio" name="q25" value="D"> D) sc.parallelize([1, 2, 3, 4])</label>
+        </div>
+        <div class="explanation" id="ex25"><strong>Explanation:</strong> The expression `rdd.map(lambda x: x*x)` applies an anonymous function to every element inside the dataset, squaring its values.</div>
+    </div>
+
+    <div class="question-card" id="q26-card">
+        <p class="question-text">26. Under the Ambari interface configurations console, what change must be committed to restrict verbose script trace output and capture only severe execution failures?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q26" value="A"> A) Set ambari-admin-password-reset to true.</label>
+            <label class="option-item"><input type="radio" name="q26" value="B"> B) Change "log4j.rootCategory=INFO, console" to "log4j.rootCategory=ERROR, console".</label>
+            <label class="option-item"><input type="radio" name="q26" value="C"> C) Downgrade the terminal packages using sudo pip install numpy==1.16.</label>
+            <label class="option-item"><input type="radio" name="q26" value="D"> D) Reroute the execution entry point connection from hdfs:// to s3n://.</label>
+        </div>
+        <div class="explanation" id="ex26"><strong>Explanation:</strong> Adjusting `log4j.rootCategory` to log `ERROR` instead of `INFO` inside the spark2-log4j-properties panel silences noisy processing alerts on the terminal console.</div>
+    </div>
+
+    <div class="question-card" id="q27-card">
+        <p class="question-text">27. What terminal command resets the Ambari administrator login password from a secure PuTTY shell instance?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q27" value="A"> A) hadoop fs -copyFromLocal</label>
+            <label class="option-item"><input type="radio" name="q27" value="B"> B) ambari-admin-password-reset</label>
+            <label class="option-item"><input type="radio" name="q27" value="C"> C) spark-submit python.py</label>
+            <label class="option-item"><input type="radio" name="q27" value="D"> D) HiveContext(sc).sql</label>
+        </div>
+        <div class="explanation" id="ex27"><strong>Explanation:</strong> Executing `ambari-admin-password-reset` under root terminal privileges restarts the administrative access configuration properties.</div>
+    </div>
+
+    <div class="question-card" id="q28-card">
+        <p class="question-text">28. Which DataFrame API command allows developers to compute average calculations grouped by field categories?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q28" value="A"> A) myResultDataFrame.filter("fieldName > 10")</label>
+            <label class="option-item"><input type="radio" name="q28" value="B"> B) myResultDataFrame.groupBy("fieldName").mean()</label>
+            <label class="option-item"><input type="radio" name="q28" value="C"> C) myResultDataFrame.select("fieldName")</label>
+            <label class="option-item"><input type="radio" name="q28" value="D"> D) rdd.filter(lambda x: x[1] > 30)</label>
+        </div>
+        <div class="explanation" id="ex28"><strong>Explanation:</strong> DataFrames leverage `groupBy()` combined with downstream aggregate functions like `.mean()` to compute summary analytics.</div>
+    </div>
+
+    <div class="question-card" id="q29-card">
+        <p class="question-text">29. In PySpark, which entry point object must be initiated to execute SQL queries directly against structured tables?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q29" value="A"> A) HiveContext or SQLContext</label>
+            <label class="option-item"><input type="radio" name="q29" value="B"> B) SparkContext (sc) variable only</label>
+            <label class="option-item"><input type="radio" name="q29" value="C"> C) log4j category configuration properties</label>
+            <label class="option-item"><input type="radio" name="q29" value="D"> D) Grunt console interface pipeline</label>
+        </div>
+        <div class="explanation" id="ex29"><strong>Explanation:</strong> Initiating a `HiveContext` or `SQLContext` provides the execution pathway required to translate declarative SQL expressions into Spark data processing tasks.</div>
+    </div>
+
+    <div class="question-card" id="q30-card">
+        <p class="question-text">30. When setting up dependencies via terminal commands to run the movie recommendation model bonus tasks with MLLib, what specific library installation instruction is issued?</p>
+        <div class="options-list">
+            <label class="option-item"><input type="radio" name="q30" value="A"> A) hadoop fs -mkdir ml-100k</label>
+            <label class="option-item"><input type="radio" name="q30" value="B"> B) sudo pip install numpy==1.16</label>
+            <label class="option-item"><input type="radio" name="q30" value="C"> C) ambari-admin-password-reset</label>
+            <label class="option-item"><input type="radio" name="q30" value="D"> D) su root</label>
+        </div>
+        <div class="explanation" id="ex30"><strong>Explanation:</strong> Running linear algebra operations via Spark's MLLib requires installing compatible analytical numerical dependencies using the system command `sudo pip install numpy==1.16`.</div>
+    </div>
+
+</div>
+
+<script>
+    // Configuration dictionary detailing correct answers for validation logic evaluation
+    const solutions = {
+        q1: 'B', q2: 'B', q3: 'B', q4: 'B', q5: 'B',
+        q6: 'C', q7: 'B', q8: 'B', q9: 'B', q10: 'B',
+        q11: 'B', q12: 'B', q13: 'B', q14: 'B', q15: 'B',
+        q16: 'B', q17: 'C', q18: 'C', q19: 'C', q20: 'B',
+        q21: 'B', q22: 'C', q23: 'B', q24: 'B', q25: 'B',
+        q26: 'B', q27: 'B', q28: 'B', q29: 'A', q30: 'B'
+    };
+
+    let points = {};
+    const summaryDisplay = document.getElementById('scoreSummary');
+
+    function updateScoreSummary() {
+        const totalIdentified = Object.keys(points).length;
+        const totalCorrectAnswers = Object.values(points).reduce((acc, curr) => acc + curr, 0);
+        summaryDisplay.textContent = `Score: ${totalCorrectAnswers} / 30 correct (${totalIdentified} attempted)`;
+    }
+
+    // Attach immediate interactive review events to all answer options
+    document.querySelectorAll('.option-item input[type="radio"]').forEach(element => {
+        element.addEventListener('change', function() {
+            const currentQuestionId = this.name; 
+            const chosenOptionValue = this.value;
+            const validSolutionValue = solutions[currentQuestionId];
+            
+            const parentBlock = document.getElementById(currentQuestionId + '-card');
+            const sisterLabels = parentBlock.querySelectorAll('.option-item');
+            const targetExplanation = document.getElementById('ex' + currentQuestionId.slice(1));
+
+            // Clean previous checking styling rules
+            sisterLabels.forEach(lbl => {
+                lbl.classList.remove('correct', 'incorrect');
+            });
+
+            // Evaluate answer logic condition
+            if (chosenOptionValue === validSolutionValue) {
+                this.parentElement.classList.add('correct');
+                points[currentQuestionId] = 1;
+            } else {
+                this.parentElement.classList.add('incorrect');
+                points[currentQuestionId] = 0;
+
+                // Emphasize correct answer option as instantaneous learning feedback
+                sisterLabels.forEach(lbl => {
+                    if (lbl.querySelector('input').value === validSolutionValue) {
+                        lbl.classList.add('correct');
+                    }
+                });
+            }
+
+            // Expose background reasoning context text
+            targetExplanation.style.display = 'block';
+            updateScoreSummary();
+        });
+    });
+</script>
+
+</body>
+</html>
