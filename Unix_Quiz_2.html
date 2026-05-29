@@ -978,7 +978,7 @@
         const totalCount = Object.keys(answerKey).length;
         
         for (let key in answerKey) {
-            const feedbackBox = document.getElementById('feedback-' + key);
+            const feedbackBox = document.getElementById('feedback-' + key.slice(1));
             const userSelection = document.querySelector(`input[name="${key}"]:checked`);
             
             if (userSelection) {
@@ -1003,7 +1003,9 @@
         scoreTitle.innerHTML = "Your Final Score: " + accurateCount + " / " + totalCount + " (" + percent + "%)";
         scoreBox.style.display = "block";
         
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        const container = document.querySelector('.container');
+        container.insertBefore(scoreBox, container.firstChild);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 

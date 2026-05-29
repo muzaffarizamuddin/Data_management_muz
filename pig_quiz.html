@@ -52,6 +52,7 @@
             margin-bottom: 35px;
             padding-bottom: 25px;
             border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease, border-left 0.2s ease;
         }
         .q-text {
             font-size: 15.5px;
@@ -144,6 +145,7 @@
             padding: 25px;
             background: #f5f6fa;
             border: 2px dashed var(--border-color);
+            border-left: 6px solid var(--accent-color);
             border-radius: 6px;
         }
         #summary-txt {
@@ -1165,21 +1167,33 @@
         const itemsTotal = Object.keys(realAnswers).length;
         
         for (let key in realAnswers) {
-            const panel = document.getElementById('result-' + key);
+            const container = document.getElementById(key + '-box');
+            const panel = document.getElementById('result-' + key.slice(1));
             const choice = document.querySelector(`input[name="${key}"]:checked`);
+
+            container.style.backgroundColor = '';
+            container.style.borderLeft = '';
+            panel.className = 'result-panel';
+            panel.innerHTML = '';
             
             if (choice) {
                 if (choice.value === realAnswers[key]) {
                     accurateCount++;
-                    panel.className = "result-panel ok";
-                    panel.innerHTML = "<strong>Correct!</strong> " + rationales[key];
+                    container.style.backgroundColor = '#e6f4ea';
+                    container.style.borderLeft = '6px solid var(--success-color)';
+                    panel.className = 'result-panel ok';
+                    panel.innerHTML = '<strong>Correct!</strong> ' + rationales[key];
                 } else {
-                    panel.className = "result-panel err";
-                    panel.innerHTML = "<strong>Incorrect. The right option is " + realAnswers[key] + ".</strong> " + rationales[key];
+                    container.style.backgroundColor = '#fce8e6';
+                    container.style.borderLeft = '6px solid var(--error-color)';
+                    panel.className = 'result-panel err';
+                    panel.innerHTML = '<strong>Incorrect. The right option is ' + realAnswers[key] + '.</strong> ' + rationales[key];
                 }
             } else {
-                panel.className = "result-panel err";
-                panel.innerHTML = "<strong>Not Answered. The right option is " + realAnswers[key] + ".</strong> " + rationales[key];
+                container.style.backgroundColor = '#fce8e6';
+                container.style.borderLeft = '6px solid var(--error-color)';
+                panel.className = 'result-panel err';
+                panel.innerHTML = '<strong>Not Answered. The right option is ' + realAnswers[key] + '.</strong> ' + rationales[key];
             }
         }
 
@@ -1187,10 +1201,12 @@
         const txt = document.getElementById('summary-txt');
         const percentage = Math.round((accurateCount / itemsTotal) * 100);
         
-        txt.innerHTML = "Your Performance: " + accurateCount + " / " + itemsTotal + " Questions Answered Correctly (" + percentage + "%)";
-        box.style.display = "block";
-        
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        txt.innerHTML = 'Your Performance: ' + accurateCount + ' / ' + itemsTotal + ' Questions Correct (' + percentage + '%)';
+        box.style.display = 'block';
+
+        const wrapper = document.querySelector('.wrapper');
+        wrapper.insertBefore(box, wrapper.firstElementChild);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 
