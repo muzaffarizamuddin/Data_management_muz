@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIX System Administration Technical Assessment</title>
+    <style>
+        :root {
+            --bg-color: #f5f7fa;
+            --container-bg: #ffffff;
+            --primary-color: #2c3e50;
+            --accent-color: #16a085;
+            --text-color: #34495e;
+            --border-color: #dcdde1;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --hint-bg: #e8f8f5;
+            --hint-border: #a3e4d7;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 26px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 12px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 35px;
+            font-size: 14px;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .question-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+        .option-item {
+            margin-bottom: 10px;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fafbfc;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-label:hover {
+            background: #f1f2f6;
+            border-color: var(--accent-color);
+        }
+        input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn-hint {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+        .btn-hint:hover {
+            background-color: var(--hint-bg);
+        }
+        .hint-text {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: var(--hint-bg);
+            border: 1px solid var(--hint-border);
+            border-radius: 6px;
+            font-size: 13.5px;
+            color: #117a65;
+        }
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .feedback.correct {
+            display: block;
+            background-color: #d4edda;
+            color: var(--success-color);
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.incorrect {
+            display: block;
+            background-color: #f8d7da;
+            color: var(--error-color);
+            border: 1px solid #f5c6cb;
+        }
+        #score-box {
+            display: none;
+            text-align: center;
+            margin-top: 35px;
+            padding: 25px;
+            background: #eaf2f8;
+            border: 1px solid #a9ccee;
+            border-radius: 8px;
+        }
+        #score-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .center-btn {
+            text-align: center;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>UNIX & Linux Commands Technical Assessment</h1>
+    <div class="subtitle">Curriculum Courseware Knowledge Validation Exam - 20 Randomized Questions</div>
+
+    <form id="assessment-form">
+
+        <!-- Question 1 -->
+        <div class="question-block" id="q1-block">
+            <div class="question-text">1. Inside a bash script, what is the key behavioral difference between referencing parameters using "$@" (with quotes) versus $@ (without quotes)?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="A">
+                        <span><strong>A.</strong> "$@" triggers a shell syntax verification exception, while raw $@ is the only standard convention.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="B">
+                        <span><strong>B.</strong> "$@" combines all variables into a single continuous string delimited by commas.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="C">
+                        <span><strong>C.</strong> "$@" expands arguments as separate words preserving internal spaces, whereas raw $@ splits space-separated arguments into multiple distinct words.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q1" value="D">
+                        <span><strong>D.</strong> "$@" restricts variable evaluation exclusively to the first two parameters passed to the terminal.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(1)">Show Hint</button>
+            <div class="hint-text" id="hint-1">Think about how shell variable expansion handles word splitting when arguments contain actual space characters.</div>
+            <div class="feedback" id="feedback-1"></div>
+        </div>
+    
+        <!-- Question 2 -->
+        <div class="question-block" id="q2-block">
+            <div class="question-text">2. If you need to display all contents of a directory, including hidden configuration files whose filenames begin with a dot (.), which command must you execute?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="A">
+                        <span><strong>A.</strong> ls -1</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="B">
+                        <span><strong>B.</strong> ls -a</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="C">
+                        <span><strong>C.</strong> ls -h</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q2" value="D">
+                        <span><strong>D.</strong> ls -l</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(2)">Show Hint</button>
+            <div class="hint-text" id="hint-2">The flag letter stands for 'all'.</div>
+            <div class="feedback" id="feedback-2"></div>
+        </div>
+    
+        <!-- Question 3 -->
+        <div class="question-block" id="q3-block">
+            <div class="question-text">3. What happens to a non-empty directory if you execute the command 'rmdir folder_name'?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="A">
+                        <span><strong>A.</strong> The directory and all its files are permanently purged recursively.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="B">
+                        <span><strong>B.</strong> The directory is safely sent to the system-wide graphical user recycle trash bin.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="C">
+                        <span><strong>C.</strong> The execution fails because rmdir only removes directories that are completely empty.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q3" value="D">
+                        <span><strong>D.</strong> The directory is compressed automatically into a backup zip archive.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(3)">Show Hint</button>
+            <div class="hint-text" id="hint-3">The name of the command itself stands specifically for 'remove directory', but it has strict structural constraints.</div>
+            <div class="feedback" id="feedback-3"></div>
+        </div>
+    
+        <!-- Question 4 -->
+        <div class="question-block" id="q4-block">
+            <div class="question-text">4. Which exact command sequence allows you to display the first 20 lines of a text archive named 'dataset.csv'?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="A">
+                        <span><strong>A.</strong> head -n 20 dataset.csv</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="B">
+                        <span><strong>B.</strong> less --rows=20 dataset.csv</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="C">
+                        <span><strong>C.</strong> tail -n 20 dataset.csv</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q4" value="D">
+                        <span><strong>D.</strong> cat -lines 20 dataset.csv</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(4)">Show Hint</button>
+            <div class="hint-text" id="hint-4">The default execution of this tool reads the top 10 lines of a document, but a modifier changes that value.</div>
+            <div class="feedback" id="feedback-4"></div>
+        </div>
+    
+        <!-- Question 5 -->
+        <div class="question-block" id="q5-block">
+            <div class="question-text">5. Under the standard octal notation rules for changing file modes, what specific access permissions are granted by the numerical value 755?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="A">
+                        <span><strong>A.</strong> Execute-only access for the owner, write-only access for the group, and read-only access for the world.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="B">
+                        <span><strong>B.</strong> Read and write (rw) privileges for the owner, with absolute zero access for group and world.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="C">
+                        <span><strong>C.</strong> Full rwx (read, write, execute) for the owner, and rx (read, execute) for both the group and world.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q5" value="D">
+                        <span><strong>D.</strong> Full rwx (read, write, execute) for every single user class on the operational operating system.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(5)">Show Hint</button>
+            <div class="hint-text" id="hint-5">Calculate bits: 4=read, 2=write, 1=execute. The values map sequentially to Owner, Group, and World.</div>
+            <div class="feedback" id="feedback-5"></div>
+        </div>
+    
+        <!-- Question 6 -->
+        <div class="question-block" id="q6-block">
+            <div class="question-text">6. How can you perform a recursive keyword text lookup for the word 'config' across all files within your current path and its subdirectories?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="A">
+                        <span><strong>A.</strong> ls --search="config"</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="B">
+                        <span><strong>B.</strong> find -name "config"</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="C">
+                        <span><strong>C.</strong> grep "config" file</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q6" value="D">
+                        <span><strong>D.</strong> grep -r "config"</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(6)">Show Hint</button>
+            <div class="hint-text" id="hint-6">You need the Global Regular Expression Print utility combined with the lowercase flag for recursive directory traversal.</div>
+            <div class="feedback" id="feedback-6"></div>
+        </div>
+    
+        <!-- Question 7 -->
+        <div class="question-block" id="q7-block">
+            <div class="question-text">7. What is the technical role of the vertical bar operator '|' when processing Unix shell pipelines?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="A">
+                        <span><strong>A.</strong> It runs the left command in the background while updating system hardware process trees.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="B">
+                        <span><strong>B.</strong> It intercepts the standard output stream of the left command and feeds it directly as the standard input stream to the right command.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="C">
+                        <span><strong>C.</strong> It acts as a logical 'OR' condition that stops execution if the first command succeeds.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q7" value="D">
+                        <span><strong>D.</strong> It saves terminal logging messages directly into a local backup text file.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(7)">Show Hint</button>
+            <div class="hint-text" id="hint-7">This symbol is commonly termed a 'pipe' and represents a feed-forward streaming data pipeline.</div>
+            <div class="feedback" id="feedback-7"></div>
+        </div>
+    
+        <!-- Question 8 -->
+        <div class="question-block" id="q8-block">
+            <div class="question-text">8. Which exact flag combination should you provide to the 'tar' utility to create a new gzipped archive file?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q8" value="A">
+                        <span><strong>A.</strong> tar -czf file.tar.gz folder/</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q8" value="B">
+                        <span><strong>B.</strong> tar -extract file.tar.gz</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q8" value="C">
+                        <span><strong>C.</strong> tar -xzf file.tar.gz</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q8" value="D">
+                        <span><strong>D.</strong> tar -zip file.tar.gz folder/</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(8)">Show Hint</button>
+            <div class="hint-text" id="hint-8">The flag letters stand for: Create, gZip, and File name.</div>
+            <div class="feedback" id="feedback-8"></div>
+        </div>
+    
+        <!-- Question 9 -->
+        <div class="question-block" id="q9-block">
+            <div class="question-text">9. If you want to download a file from a remote web URL using 'curl' and preserve its exact native remote filename locally, which syntax is accurate?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q9" value="A">
+                        <span><strong>A.</strong> curl -O https://www.gnu.org/licenses/gpl-3.0.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q9" value="B">
+                        <span><strong>B.</strong> curl -o gpl-3.0.txt https://www.gnu.org/licenses/gpl-3.0.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q9" value="C">
+                        <span><strong>C.</strong> curl -save https://www.gnu.org/licenses/gpl-3.0.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q9" value="D">
+                        <span><strong>D.</strong> curl -# https://www.gnu.org/licenses/gpl-3.0.txt</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(9)">Show Hint</button>
+            <div class="hint-text" id="hint-9">The flag is a single letter, and its capitalization changes whether the output filename is customized or kept native.</div>
+            <div class="feedback" id="feedback-9"></div>
+        </div>
+    
+        <!-- Question 10 -->
+        <div class="question-block" id="q10-block">
+            <div class="question-text">10. What happens to the targeted file when running the output redirection command 'echo "Log Entry" >> system.log'?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q10" value="A">
+                        <span><strong>A.</strong> The string text is output directly onto the visual console display screen instead of the file archive.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q10" value="B">
+                        <span><strong>B.</strong> The existing content of system.log is entirely overwritten and erased.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q10" value="C">
+                        <span><strong>C.</strong> A file system error is returned if system.log already exists in the folder directory.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q10" value="D">
+                        <span><strong>D.</strong> The text "Log Entry" is appended onto the end of system.log, preserving all prior content lines.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(10)">Show Hint</button>
+            <div class="hint-text" id="hint-10">A single angle bracket '>' overwrites, whereas a double angle bracket '>>' accumulates data at the bottom.</div>
+            <div class="feedback" id="feedback-10"></div>
+        </div>
+    
+        <!-- Question 11 -->
+        <div class="question-block" id="q11-block">
+            <div class="question-text">11. Which of the following statements represents a true comparison between the 'tar -czf' archive method and the 'zip' format on Linux native environments?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q11" value="A">
+                        <span><strong>A.</strong> tar -czf creates windows-compatible archives that open natively via Windows Explorer without third-party utilities.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q11" value="B">
+                        <span><strong>B.</strong> zip utilizes gzip internal compression protocols, whereas tar archives are completely uncompressed by default.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q11" value="C">
+                        <span><strong>C.</strong> tar -czf fully preserves granular Linux file permissions natively, whereas zip has limited permission retention support.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q11" value="D">
+                        <span><strong>D.</strong> zip is installed and configured as the default archiving application across all classic Linux distributions.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(11)">Show Hint</button>
+            <div class="hint-text" id="hint-11">Consider what happens to structural metadata attributes like file owner and execute flags during archiving transfers.</div>
+            <div class="feedback" id="feedback-11"></div>
+        </div>
+    
+        <!-- Question 12 -->
+        <div class="question-block" id="q12-block">
+            <div class="question-text">12. You are currently running a complex system simulation tool on your terminal and need to monitor live process metrics and exit by pressing 'q'. Which tool should you invoke?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q12" value="A">
+                        <span><strong>A.</strong> whoami</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q12" value="B">
+                        <span><strong>B.</strong> top</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q12" value="C">
+                        <span><strong>C.</strong> df -h</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q12" value="D">
+                        <span><strong>D.</strong> uname -a</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(12)">Show Hint</button>
+            <div class="hint-text" id="hint-12">This interactive task tracker lists dynamic process items and updates live utilization metrics on screen.</div>
+            <div class="feedback" id="feedback-12"></div>
+        </div>
+    
+        <!-- Question 13 -->
+        <div class="question-block" id="q13-block">
+            <div class="question-text">13. If you wish to duplicate an entire directory structure named 'source_folder' into a new path called 'backup_folder', what is the proper operational syntax?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q13" value="A">
+                        <span><strong>A.</strong> mkdir -cp source_folder backup_folder</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q13" value="B">
+                        <span><strong>B.</strong> cp -r source_folder backup_folder</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q13" value="C">
+                        <span><strong>C.</strong> mv source_folder backup_folder</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q13" value="D">
+                        <span><strong>D.</strong> cp source_folder backup_folder</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(13)">Show Hint</button>
+            <div class="hint-text" id="hint-13">Copying folders requires a recursive flag so that all internal items are handled iteratively.</div>
+            <div class="feedback" id="feedback-13"></div>
+        </div>
+    
+        <!-- Question 14 -->
+        <div class="question-block" id="q14-block">
+            <div class="question-text">14. Which terminal command returns the full absolute path of the current workspace directory you are operating in?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q14" value="A">
+                        <span><strong>A.</strong> df -h</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q14" value="B">
+                        <span><strong>B.</strong> whoami</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q14" value="C">
+                        <span><strong>C.</strong> cd ..</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q14" value="D">
+                        <span><strong>D.</strong> pwd</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(14)">Show Hint</button>
+            <div class="hint-text" id="hint-14">The acronym stands for 'print working directory'.</div>
+            <div class="feedback" id="feedback-14"></div>
+        </div>
+    
+        <!-- Question 15 -->
+        <div class="question-block" id="q15-block">
+            <div class="question-text">15. When looking at file details via 'ls -l', what does a leading hyphen '-' character specify at the start of the permission string entry (e.g., -rw-r--r--)?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q15" value="A">
+                        <span><strong>A.</strong> It indicates that the listed item is a regular file.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q15" value="B">
+                        <span><strong>B.</strong> It marks the file system object as a hidden configuration asset.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q15" value="C">
+                        <span><strong>C.</strong> It signifies that execution permissions are completely blocked for all user classes.</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q15" value="D">
+                        <span><strong>D.</strong> It indicates that the listed item is a subfolder directory.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(15)">Show Hint</button>
+            <div class="hint-text" id="hint-15">A leading 'd' characterizes directories, while a simple hyphen refers to standard document items.</div>
+            <div class="feedback" id="feedback-15"></div>
+        </div>
+    
+        <!-- Question 16 -->
+        <div class="question-block" id="q16-block">
+            <div class="question-text">16. What numeric calculation determines the value of octal read (r), write (w), and execute (x) parameters inside the 'chmod' tool?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q16" value="A">
+                        <span><strong>A.</strong> Read = 1, Write = 2, Execute = 4</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q16" value="B">
+                        <span><strong>B.</strong> Read = 4, Write = 3, Execute = 2</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q16" value="C">
+                        <span><strong>C.</strong> Read = 3, Write = 2, Execute = 1</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q16" value="D">
+                        <span><strong>D.</strong> Read = 4, Write = 2, Execute = 1</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(16)">Show Hint</button>
+            <div class="hint-text" id="hint-16">Adding these numeric bits together derives permissions (e.g., 4 + 2 + 1 = 7).</div>
+            <div class="feedback" id="feedback-16"></div>
+        </div>
+    
+        <!-- Question 17 -->
+        <div class="question-block" id="q17-block">
+            <div class="question-text">17. To examine the global hardware platform architecture details and system operating information, which utility should be selected?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q17" value="A">
+                        <span><strong>A.</strong> whoami</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q17" value="B">
+                        <span><strong>B.</strong> uname -a</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q17" value="C">
+                        <span><strong>C.</strong> du -sh</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q17" value="D">
+                        <span><strong>D.</strong> df -h</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(17)">Show Hint</button>
+            <div class="hint-text" id="hint-17">The abbreviation stands for 'Unix Name', and passing '-a' asks for all available information details.</div>
+            <div class="feedback" id="feedback-17"></div>
+        </div>
+    
+        <!-- Question 18 -->
+        <div class="question-block" id="q18-block">
+            <div class="question-text">18. If you wish to view your terminal session execution log list and copy its details to an output storage archive, which command chain handles this task safely?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q18" value="A">
+                        <span><strong>A.</strong> history > all_commands.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q18" value="B">
+                        <span><strong>B.</strong> history | grep "head -n"</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q18" value="C">
+                        <span><strong>C.</strong> top > all_commands.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q18" value="D">
+                        <span><strong>D.</strong> cat history >> all_commands.txt</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(18)">Show Hint</button>
+            <div class="hint-text" id="hint-18">This sequence pulls the historical record log and runs an absolute overwrite redirect arrow to output text.</div>
+            <div class="feedback" id="feedback-18"></div>
+        </div>
+    
+        <!-- Question 19 -->
+        <div class="question-block" id="q19-block">
+            <div class="question-text">19. Which utility displays information regarding total available storage and active disk space capacity utilization mapped across mounted system volumes?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q19" value="A">
+                        <span><strong>A.</strong> uname -a</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q19" value="B">
+                        <span><strong>B.</strong> du -sh folder</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q19" value="C">
+                        <span><strong>C.</strong> df -h</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q19" value="D">
+                        <span><strong>D.</strong> top</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(19)">Show Hint</button>
+            <div class="hint-text" id="hint-19">The initials represent 'disk free' in a human-readable format mapping.</div>
+            <div class="feedback" id="feedback-19"></div>
+        </div>
+    
+        <!-- Question 20 -->
+        <div class="question-block" id="q20-block">
+            <div class="question-text">20. When looking at the output text file generated by a script, you need to step through the rows scrollably page-by-page and exit cleanly by typing 'q'. Which command provides this interactive feature?</div>
+            <ul class="options-list">
+    
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q20" value="A">
+                        <span><strong>A.</strong> less file.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q20" value="B">
+                        <span><strong>B.</strong> head file.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q20" value="C">
+                        <span><strong>C.</strong> tail file.txt</span>
+                    </label>
+                </li>
+        
+                <li class="option-item">
+                    <label class="option-label">
+                        <input type="radio" name="q20" value="D">
+                        <span><strong>D.</strong> cat file.txt</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="btn btn-hint" onclick="toggleHint(20)">Show Hint</button>
+            <div class="hint-text" id="hint-20">Unlike cat, which dumps the entire content onto the terminal directly, this tool opens an interactive view window.</div>
+            <div class="feedback" id="feedback-20"></div>
+        </div>
+    
+        <div class="center-btn">
+            <button type="button" class="btn" style="background-color:var(--accent-color); padding: 15px 40px; font-size:16px;" onclick="calculateAssessment()">Submit Assessment</button>
+        </div>
+    </form>
+
+    <div id="score-box">
+        <div id="score-title"></div>
+    </div>
+</div>
+
+<script>
+    const answerKey = {q1: 'C', q2: 'B', q3: 'C', q4: 'A', q5: 'C', q6: 'D', q7: 'B', q8: 'A', q9: 'A', q10: 'D', q11: 'C', q12: 'B', q13: 'B', q14: 'D', q15: 'A', q16: 'D', q17: 'B', q18: 'A', q19: 'C', q20: 'A', };
+
+    const explanations = {q1: 'Enclosing "$@" in double quotes ensures that each positional parameter expands to a separate word, preserving arguments that contain internal spaces.', q2: 'The -a flag stands for \'all\' and instructs the ls command to include hidden files (those starting with a dot) in its output listing.', q3: 'The rmdir utility is strictly constrained to removing empty folders. To delete a folder with contents, \'rm -r\' must be applied instead.', q4: 'The head utility shows the beginning of a file. Appending \'-n 20\' changes the default line count from 10 rows to 20 rows.', q5: '7 is 4+2+1 (rwx) for the owner; 5 is 4+1 (rx) for the group members and the public world class.', q6: 'The grep utility searches text within files. Adding the -r flag forces a top-down recursive traversal through all nested sub-directories.', q7: 'The pipe operator \'|\' establishes a feed-forward bridge, streaming the standard output of one command into the standard input of the next.', q8: 'The -c flag creates a new archive, -z compresses it using gzip, and -f specifies the target archive filename.', q9: 'An uppercase -O flag instructs curl to save the downloaded asset using its original filename derived from the remote URL path.', q10: 'The double greater-than operator \'>>\' specifies appending redirection, which leaves old file data completely untouched.', q11: 'According to the side-by-side lecture comparison table, tar -czf preserves full Linux permissions natively, while zip permission mapping is limited.', q12: 'The top command displays dynamic real-time information about running system processes. Pressing \'q\' exits back to the main command prompt.', q13: 'Standard \'cp\' works on standalone files. To handle an entire directory structure, the recursive \'-r\' modifier flag must be appended.', q14: 'The pwd utility outputs the absolute file system directory path starting from root down to the user\'s active workspace directory location.', q15: 'In long-form directory outputs, a leading character of \'d\' stands for directory, whereas a simple hyphen \'-\' denotes a regular data file.', q16: 'The core documentation establishes that permissions calculate as follows: Read is assigned 4, Write is assigned 2, and Execute is assigned 1.', q17: 'The \'uname -a\' utility displays comprehensive system information including kernel name, network node hostname, and release values.', q18: 'The lecture slides demonstrate that running \'history > all_commands.txt\' captures all previously executed command sequences into a static file.', q19: 'The \'df -h\' command outputs disk space statistics across filesystems, where the \'-h\' option presents values in human-readable terms (GB, MB).', q20: 'The \'less\' command opens an interactive text viewing interface that allows a user to scroll up and down, exiting cleanly via the \'q\' key.', };
+
+    function toggleHint(num) {
+        const hintBox = document.getElementById('hint-' + num);
+        hintBox.style.display = (hintBox.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function calculateAssessment() {
+        let accurateCount = 0;
+        const totalCount = Object.keys(answerKey).length;
+        
+        for (let key in answerKey) {
+            const feedbackBox = document.getElementById('feedback-' + key);
+            const userSelection = document.querySelector(`input[name="${key}"]:checked`);
+            
+            if (userSelection) {
+                if (userSelection.value === answerKey[key]) {
+                    accurateCount++;
+                    feedbackBox.className = "feedback correct";
+                    feedbackBox.innerHTML = "<strong>Correct!</strong> " + explanations[key];
+                } else {
+                    feedbackBox.className = "feedback incorrect";
+                    feedbackBox.innerHTML = "<strong>Incorrect (The correct answer is " + answerKey[key] + ").</strong> " + explanations[key];
+                }
+            } else {
+                feedbackBox.className = "feedback incorrect";
+                feedbackBox.innerHTML = "<strong>Unanswered (The correct answer is " + answerKey[key] + ").</strong> " + explanations[key];
+            }
+        }
+
+        const scoreBox = document.getElementById('score-box');
+        const scoreTitle = document.getElementById('score-title');
+        const percent = Math.round((accurateCount / totalCount) * 100);
+        
+        scoreTitle.innerHTML = "Your Final Score: " + accurateCount + " / " + totalCount + " (" + percent + "%)";
+        scoreBox.style.display = "block";
+        
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

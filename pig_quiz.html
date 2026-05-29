@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Pig Architecture & Latin Scripting Assessment</title>
+    <style>
+        :root {
+            --bg-color: #f1f2f6;
+            --card-color: #ffffff;
+            --primary-color: #2f3640;
+            --accent-color: #e84118;
+            --text-color: #2f3640;
+            --border-color: #dcdde1;
+            --success-color: #4cd137;
+            --error-color: #c23616;
+            --hint-bg: #f5f6fa;
+            --hint-border: #00a8ff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 15px;
+            line-height: 1.5;
+        }
+        .wrapper {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-color);
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 24px;
+            border-bottom: 4px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        .info-tag {
+            text-align: center;
+            color: #718093;
+            font-size: 13px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .q-container {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .q-text {
+            font-size: 15.5px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+        .opts-group {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+        .opt-row {
+            margin-bottom: 8px;
+        }
+        .opt-box {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: #fbfbfb;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .opt-box:hover {
+            background: #f5f6fa;
+            border-color: var(--hint-border);
+        }
+        input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+        .hint-btn {
+            background-color: transparent;
+            color: #00a8ff;
+            border: 1px solid #00a8ff;
+        }
+        .hint-btn:hover {
+            background-color: #edf2fa;
+        }
+        .hint-panel {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #e1f5fe;
+            border: 1px solid #b3e5fc;
+            border-radius: 5px;
+            font-size: 13px;
+            color: #0288d1;
+        }
+        .result-panel {
+            display: none;
+            margin-top: 12px;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 13.5px;
+        }
+        .result-panel.ok {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .result-panel.err {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        #summary-box {
+            display: none;
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: #f5f6fa;
+            border: 2px dashed var(--border-color);
+            border-radius: 6px;
+        }
+        #summary-txt {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .btn-center-holder {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>Apache Pig & Pig Latin Core Architecture Assessment</h1>
+    <div class="info-tag">Based on Hadoop Data Flows Courseware Curriculum - 25 Randomized Practice Evaluation Questions</div>
+
+    <form id="quiz-form">
+
+        <!-- Question 1 -->
+        <div class="q-container" id="q1-box">
+            <div class="q-text">1. What is Apache Pig primarily designed to do within the Apache Hadoop ecosystem?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q1" value="A">
+                        <span><strong>A.</strong> Act as a hardware load-balancer monitoring resource allocation across various computing clusters.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q1" value="B">
+                        <span><strong>B.</strong> Manage relational database schemas via absolute ACID transactions over traditional hardware architectures.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q1" value="C">
+                        <span><strong>C.</strong> Provide a high-level platform for processing and analyzing large datasets by abstracting the complexity of MapReduce.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q1" value="D">
+                        <span><strong>D.</strong> Serve as a low-level machine learning library tailored specifically to streaming real-time stream systems.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(1)">View Clue</button>
+            <div class="hint-panel" id="hint-1">Think about why data analysts prefer Pig Latin scripts over writing raw Java MapReduce execution code.</div>
+            <div class="result-panel" id="result-1"></div>
+        </div>
+    
+        <!-- Question 2 -->
+        <div class="q-container" id="q2-box">
+            <div class="q-text">2. Which scripting data flow language is utilized natively within the Apache Pig platform environment?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q2" value="A">
+                        <span><strong>A.</strong> PigScript</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q2" value="B">
+                        <span><strong>B.</strong> Pig SQL</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q2" value="C">
+                        <span><strong>C.</strong> Hadoop Script</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q2" value="D">
+                        <span><strong>D.</strong> Pig Latin</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(2)">View Clue</button>
+            <div class="hint-panel" id="hint-2">The name borrows its inspiration from a humorous language game, combined with the name of the tool.</div>
+            <div class="result-panel" id="result-2"></div>
+        </div>
+    
+        <!-- Question 3 -->
+        <div class="q-container" id="q3-box">
+            <div class="q-text">3. According to the Pig Architecture overview, which of the following layer chains represents the path from translation down to final file storage?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q3" value="A">
+                        <span><strong>A.</strong> Pig Latin -> MapReduce -> Windows File System</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q3" value="B">
+                        <span><strong>B.</strong> HDFS -> YARN -> SQL Server</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q3" value="C">
+                        <span><strong>C.</strong> MapReduce/TEZ -> YARN -> HDFS</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q3" value="D">
+                        <span><strong>D.</strong> TEZ -> Spark Core -> Local Storage</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(3)">View Clue</button>
+            <div class="hint-panel" id="hint-3">Look for the structure shown on Page 3 which moves down through execution frameworks, cluster resource management, and distributed storage.</div>
+            <div class="result-panel" id="result-3"></div>
+        </div>
+    
+        <!-- Question 4 -->
+        <div class="q-container" id="q4-box">
+            <div class="q-text">4. Which data type is categorized as a simple scalar type in Apache Pig's specification?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q4" value="A">
+                        <span><strong>A.</strong> Bag</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q4" value="B">
+                        <span><strong>B.</strong> Chararray</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q4" value="C">
+                        <span><strong>C.</strong> Tuple</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q4" value="D">
+                        <span><strong>D.</strong> Map</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(4)">View Clue</button>
+            <div class="hint-panel" id="hint-4">Simple types handle single literal elements rather than nested or ordered structures.</div>
+            <div class="result-panel" id="result-4"></div>
+        </div>
+    
+        <!-- Question 5 -->
+        <div class="q-container" id="q5-box">
+            <div class="q-text">5. How is a 'tuple' structurally defined under Apache Pig's complex data types schema?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q5" value="A">
+                        <span><strong>A.</strong> A single continuous string of text compressed via UTF-8 formatting rules.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q5" value="B">
+                        <span><strong>B.</strong> An ordered set of data fields, conceptually similar to a row in a relational database table.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q5" value="C">
+                        <span><strong>C.</strong> An unordered collection of distinct rows wrapped inside standard square brackets.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q5" value="D">
+                        <span><strong>D.</strong> A collection of key-value mapping pairs separated by hash characters.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(5)">View Clue</button>
+            <div class="hint-panel" id="hint-5">Think about how individual row structures or field arrays are traditionally built sequentially.</div>
+            <div class="result-panel" id="result-5"></div>
+        </div>
+    
+        <!-- Question 6 -->
+        <div class="q-container" id="q6-box">
+            <div class="q-text">6. Which symbol wrapper explicitly characterizes a 'bag' data type configuration in a Pig Latin context?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q6" value="A">
+                        <span><strong>A.</strong> Curly braces enclosing tuples, such as {(19, 2), (18, 1)}</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q6" value="B">
+                        <span><strong>B.</strong> Standard parenthesis enclosing fields, such as (19, 2)</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q6" value="C">
+                        <span><strong>C.</strong> Square brackets enclosing key hashes, such as [name#John]</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q6" value="D">
+                        <span><strong>D.</strong> Angle brackets splitting text strings, such as <19, 2></span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(6)">View Clue</button>
+            <div class="hint-panel" id="hint-6">Look at the visual examples on Page 5. A bag uses outer brackets that differ from standalone row tuples.</div>
+            <div class="result-panel" id="result-6"></div>
+        </div>
+    
+        <!-- Question 7 -->
+        <div class="q-container" id="q7-box">
+            <div class="q-text">7. What complex data type represents a set of key-value pairs formatted like '[name#John, phone#5551212]'?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q7" value="A">
+                        <span><strong>A.</strong> Tuple</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q7" value="B">
+                        <span><strong>B.</strong> Map</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q7" value="C">
+                        <span><strong>C.</strong> Bag</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q7" value="D">
+                        <span><strong>D.</strong> Chararray</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(7)">View Clue</button>
+            <div class="hint-panel" id="hint-7">This type maps unique keys to values using the hash symbol separator.</div>
+            <div class="result-panel" id="result-7"></div>
+        </div>
+    
+        <!-- Question 8 -->
+        <div class="q-container" id="q8-box">
+            <div class="q-text">8. Which relational operator is used in Apache Pig to load data from an external file into a relation variable?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q8" value="A">
+                        <span><strong>A.</strong> STORE</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q8" value="B">
+                        <span><strong>B.</strong> LOAD</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q8" value="C">
+                        <span><strong>C.</strong> FOREACH</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q8" value="D">
+                        <span><strong>D.</strong> DUMP</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(8)">View Clue</button>
+            <div class="hint-panel" id="hint-8">This command acts as the initial entry point operator for reading storage assets into your Pig Latin stream.</div>
+            <div class="result-panel" id="result-8"></div>
+        </div>
+    
+        <!-- Question 9 -->
+        <div class="q-container" id="q9-box">
+            <div class="q-text">9. What is the operational distinction between the 'DUMP' and 'STORE' operators in Pig Latin?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q9" value="A">
+                        <span><strong>A.</strong> DUMP applies to simple data types only, whereas STORE is required for complex collections like maps and bags.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q9" value="B">
+                        <span><strong>B.</strong> DUMP permanently erases temporary records, while STORE updates system directory caches.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q9" value="C">
+                        <span><strong>C.</strong> DUMP prints results directly onto the terminal screen, whereas STORE saves results into an output file directory.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q9" value="D">
+                        <span><strong>D.</strong> DUMP executes MapReduce tasks instantly, while STORE operates purely as a schema layout validation step.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(9)">View Clue</button>
+            <div class="hint-panel" id="hint-9">One operator lets you instantly view your relation contents for validation, while the other writes the collection to disk storage.</div>
+            <div class="result-panel" id="result-9"></div>
+        </div>
+    
+        <!-- Question 10 -->
+        <div class="q-container" id="q10-box">
+            <div class="q-text">10. Which Pig Latin relational keyword enables a user to extract precise rows from a dataset based on a specific boolean conditional expression?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q10" value="A">
+                        <span><strong>A.</strong> ORDER BY</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q10" value="B">
+                        <span><strong>B.</strong> FILTER</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q10" value="C">
+                        <span><strong>C.</strong> FOREACH</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q10" value="D">
+                        <span><strong>D.</strong> GROUP</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(10)">View Clue</button>
+            <div class="hint-panel" id="hint-10">This command serves the exact same diagnostic screening role as the SQL 'WHERE' conditional clause.</div>
+            <div class="result-panel" id="result-10"></div>
+        </div>
+    
+        <!-- Question 11 -->
+        <div class="q-container" id="q11-box">
+            <div class="q-text">11. What is the accurate syntax for filtering a relation named 'student_details' where the 'age' field is greater than 20?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q11" value="A">
+                        <span><strong>A.</strong> filter_data = student_details.FILTER(age > 20);</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q11" value="B">
+                        <span><strong>B.</strong> filter_data = FILTER student_details WHERE age > 20;</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q11" value="C">
+                        <span><strong>C.</strong> filter_data = LOAD student_details BY age > 20;</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q11" value="D">
+                        <span><strong>D.</strong> filter_data = FILTER student_details BY age > 20;</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(11)">View Clue</button>
+            <div class="hint-panel" id="hint-11">Review the specific structural format listed on Page 8. Make sure to use the 'BY' connector instead of 'WHERE'.</div>
+            <div class="result-panel" id="result-11"></div>
+        </div>
+    
+        <!-- Question 12 -->
+        <div class="q-container" id="q12-box">
+            <div class="q-text">12. Which relational operator allows you to step through data rows iteratively to generate a specific set of transformed output data columns?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q12" value="A">
+                        <span><strong>A.</strong> FILTER</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q12" value="B">
+                        <span><strong>B.</strong> JOIN</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q12" value="C">
+                        <span><strong>C.</strong> GROUP</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q12" value="D">
+                        <span><strong>D.</strong> FOREACH</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(12)">View Clue</button>
+            <div class="hint-panel" id="hint-12">This operator is frequently combined with the 'GENERATE' keyword statement to construct or rearrange schemas column-by-column.</div>
+            <div class="result-panel" id="result-12"></div>
+        </div>
+    
+        <!-- Question 13 -->
+        <div class="q-container" id="q13-box">
+            <div class="q-text">13. If you need to sort the content records inside a relation named 'student_details' by the 'age' column in descending order, which statement is syntactically valid?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q13" value="A">
+                        <span><strong>A.</strong> sort_data = GROUP student_details BY age DESC;</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q13" value="B">
+                        <span><strong>B.</strong> sort_data = ORDER student_details WITH age DOWN;</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q13" value="C">
+                        <span><strong>C.</strong> sort_data = ORDER student_details BY age DESC;</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q13" value="D">
+                        <span><strong>D.</strong> sort_data = SORT student_details BY age DESCENDING;</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(13)">View Clue</button>
+            <div class="hint-panel" id="hint-13">The command incorporates two words followed by the relation name, field name, and a standard ordering keyword.</div>
+            <div class="result-panel" id="result-13"></div>
+        </div>
+    
+        <!-- Question 14 -->
+        <div class="q-container" id="q14-box">
+            <div class="q-text">14. What is the structural output configuration when applying the 'GROUP' operator to a single dataset relation?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q14" value="A">
+                        <span><strong>A.</strong> It merges two disparate data sources together by matching mutual column identifiers.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q14" value="B">
+                        <span><strong>B.</strong> It generates a new relation containing a 'group' key field along with a nested bag of all matching collected tuples.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q14" value="C">
+                        <span><strong>C.</strong> It flattens multi-dimensional structures into single row text strings delimited by tabs.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q14" value="D">
+                        <span><strong>D.</strong> It automatically sorts the target elements in an ascending alphabetical list layout.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(14)">View Clue</button>
+            <div class="hint-panel" id="hint-14">Look closely at the explicit execution data diagram on Page 11 showing how multiple rows fold together into a combined record schema.</div>
+            <div class="result-panel" id="result-14"></div>
+        </div>
+    
+        <!-- Question 15 -->
+        <div class="q-container" id="q15-box">
+            <div class="q-text">15. Which keyword must be used to view the structural layout, field names, and assigned data types of a particular relation schema?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q15" value="A">
+                        <span><strong>A.</strong> EXPLAIN</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q15" value="B">
+                        <span><strong>B.</strong> DUMP</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q15" value="C">
+                        <span><strong>C.</strong> DESCRIBE</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q15" value="D">
+                        <span><strong>D.</strong> ILLUSTRATE</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(15)">View Clue</button>
+            <div class="hint-panel" id="hint-15">This tool behaves similarly to its database catalog viewing namesake in standard relational SQL environments.</div>
+            <div class="result-panel" id="result-15"></div>
+        </div>
+    
+        <!-- Question 16 -->
+        <div class="q-container" id="q16-box">
+            <div class="q-text">16. What is the specific diagnostic purpose of running the 'ILLUSTRATE' execution operator in Apache Pig?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q16" value="A">
+                        <span><strong>A.</strong> To view a step-by-step mock execution trace showing sample data transformations through the script's relational blocks.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q16" value="B">
+                        <span><strong>B.</strong> To provide a complete printed map of cluster hardware execution performance metrics.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q16" value="C">
+                        <span><strong>C.</strong> To generate a graphic flowchart file saved as a PNG image in local disk folders.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q16" value="D">
+                        <span><strong>D.</strong> To check for code syntax compiling errors without touching data assets.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(16)">View Clue</button>
+            <div class="hint-panel" id="hint-16">This tool produces a text-based grid trace chart mapping mock data flows from input to output, as shown on Page 14.</div>
+            <div class="result-panel" id="result-16"></div>
+        </div>
+    
+        <!-- Question 17 -->
+        <div class="q-container" id="q17-box">
+            <div class="q-text">17. Which evaluation tool produces a detailed textual summary of the physical, logical, and MapReduce execution strategies devised for a Pig Latin script?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q17" value="A">
+                        <span><strong>A.</strong> EXPLAIN</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q17" value="B">
+                        <span><strong>B.</strong> DUMP</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q17" value="C">
+                        <span><strong>C.</strong> DESCRIBE</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q17" value="D">
+                        <span><strong>D.</strong> ILLUSTRATE</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(17)">View Clue</button>
+            <div class="hint-panel" id="hint-17">The operator explains the execution pipeline steps and execution DAG pathways designed for YARN.</div>
+            <div class="result-panel" id="result-17"></div>
+        </div>
+    
+        <!-- Question 18 -->
+        <div class="q-container" id="q18-box">
+            <div class="q-text">18. What does the relational operator 'COGROUP' do when applied across multiple dataset parameters?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q18" value="A">
+                        <span><strong>A.</strong> It executes an inner relational join that drops non-matching entries permanently.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q18" value="B">
+                        <span><strong>B.</strong> It splits a single relation column into multiple independent tables.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q18" value="C">
+                        <span><strong>C.</strong> It saves all processed data fields across multiple directory storage paths concurrently.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q18" value="D">
+                        <span><strong>D.</strong> It groups multiple relations simultaneously, creating matching nested bags of data objects grouped around a shared key.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(18)">View Clue</button>
+            <div class="hint-panel" id="hint-18">Think of it as a multi-relation grouping operation that maintains independent sub-bags grouped around a mutual joining key.</div>
+            <div class="result-panel" id="result-18"></div>
+        </div>
+    
+        <!-- Question 19 -->
+        <div class="q-container" id="q19-box">
+            <div class="q-text">19. Which relational utility matches and combines rows from two separate datasets into a single record relation based on a mutual key column?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q19" value="A">
+                        <span><strong>A.</strong> JOIN</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q19" value="B">
+                        <span><strong>B.</strong> UNION</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q19" value="C">
+                        <span><strong>C.</strong> GROUP</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q19" value="D">
+                        <span><strong>D.</strong> CROSS</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(19)">View Clue</button>
+            <div class="hint-panel" id="hint-19">This operator functions exactly like the standard database relational join command used horizontally to merge separate schemas.</div>
+            <div class="result-panel" id="result-19"></div>
+        </div>
+    
+        <!-- Question 20 -->
+        <div class="q-container" id="q20-box">
+            <div class="q-text">20. What happens when you apply the 'CROSS' operator to two distinct relations in Pig Latin?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q20" value="A">
+                        <span><strong>A.</strong> It computes the full Cartesian product, matching every row of the first dataset against every row of the second dataset.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q20" value="B">
+                        <span><strong>B.</strong> It extracts only the records that exist in the first table but are completely missing from the second table.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q20" value="C">
+                        <span><strong>C.</strong> It appends the data rows of the second table vertically straight beneath the first table rows.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q20" value="D">
+                        <span><strong>D.</strong> It merges columns from both sets but removes all duplicate values automatically.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(20)">View Clue</button>
+            <div class="hint-panel" id="hint-20">Think about the multiplicative effect where every possible pairing combinations structure is explicitly formed.</div>
+            <div class="result-panel" id="result-20"></div>
+        </div>
+    
+        <!-- Question 21 -->
+        <div class="q-container" id="q21-box">
+            <div class="q-text">21. Which built-in operator should be used if you wish to vertically concatenate or append the rows of two separate matching relations together?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q21" value="A">
+                        <span><strong>A.</strong> JOIN</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q21" value="B">
+                        <span><strong>B.</strong> COGROUP</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q21" value="C">
+                        <span><strong>C.</strong> UNION</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q21" value="D">
+                        <span><strong>D.</strong> CROSS</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(21)">View Clue</button>
+            <div class="hint-panel" id="hint-21">This keyword performs a vertical stack merger operation, combining data pools without attempting horizontal key alignment.</div>
+            <div class="result-panel" id="result-21"></div>
+        </div>
+    
+        <!-- Question 22 -->
+        <div class="q-container" id="q22-box">
+            <div class="q-text">22. What is the core operational consequence of applying the 'SPLIT' command to a single data relation?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q22" value="A">
+                        <span><strong>A.</strong> It divides an output file across multiple cluster nodes to maximize disk write storage performance.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q22" value="B">
+                        <span><strong>B.</strong> It partitions the contents of a single relation into multiple independent relations based on specific conditional checks.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q22" value="C">
+                        <span><strong>C.</strong> It slices an individual string column into a collection of token words based on space characters.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q22" value="D">
+                        <span><strong>D.</strong> It randomly samples half of the dataset records for testing optimization loops.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(22)">View Clue</button>
+            <div class="hint-panel" id="hint-22">This tool acts as a traffic director, dividing a dataset into multiple paths based on matching criteria.</div>
+            <div class="result-panel" id="result-22"></div>
+        </div>
+    
+        <!-- Question 23 -->
+        <div class="q-container" id="q23-box">
+            <div class="q-text">23. Which functional utility allows a user to eliminate redundant, identical duplicate tuple entries from a relation?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q23" value="A">
+                        <span><strong>A.</strong> SPLIT</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q23" value="B">
+                        <span><strong>B.</strong> FILTER</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q23" value="C">
+                        <span><strong>C.</strong> DISTINCT</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q23" value="D">
+                        <span><strong>D.</strong> FOREACH</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(23)">View Clue</button>
+            <div class="hint-panel" id="hint-23">This operator matches its SQL name counterpart used to isolate completely unique rows.</div>
+            <div class="result-panel" id="result-23"></div>
+        </div>
+    
+        <!-- Question 24 -->
+        <div class="q-container" id="q24-box">
+            <div class="q-text">24. If you wish to limit the total number of output rows printed or stored from a relation to a small subset count, which operator should be added?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q24" value="A">
+                        <span><strong>A.</strong> SPLIT</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q24" value="B">
+                        <span><strong>B.</strong> FILTER</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q24" value="C">
+                        <span><strong>C.</strong> LIMIT</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q24" value="D">
+                        <span><strong>D.</strong> DISTINCT</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(24)">View Clue</button>
+            <div class="hint-panel" id="hint-24">This operator restricts the row volume, which is helpful when you only want to see a small sample of your data.</div>
+            <div class="result-panel" id="result-24"></div>
+        </div>
+    
+        <!-- Question 25 -->
+        <div class="q-container" id="q25-box">
+            <div class="q-text">25. What is the core architectural advantage of utilizing Tez as an alternative execution engine to MapReduce for processing Apache Pig scripts?</div>
+            <ul class="opts-group">
+    
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q25" value="A">
+                        <span><strong>A.</strong> Tez completely removes the requirement for YARN cluster managers and HDFS storage elements.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q25" value="B">
+                        <span><strong>B.</strong> Tez translates Pig Latin scripts directly into compiled C++ binary packages that run locally outside of Hadoop.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q25" value="C">
+                        <span><strong>C.</strong> Tez changes simple scalar strings automatically into nested multi-dimensional complex mapping systems.</span>
+                    </label>
+                </li>
+        
+                <li class="opt-row">
+                    <label class="opt-box">
+                        <input type="radio" name="q25" value="D">
+                        <span><strong>D.</strong> Tez models processing workflows as a streamlined Directed Acyclic Graph (DAG), reducing redundant disk write overhead to run faster.</span>
+                    </label>
+                </li>
+        
+            </ul>
+            <button type="button" class="action-btn hint-btn" onclick="toggleHint(25)">View Clue</button>
+            <div class="hint-panel" id="hint-25">Look at the diagnostic metrics optimization chart highlighted on Page 22. It references optimization through graph orchestration.</div>
+            <div class="result-panel" id="result-25"></div>
+        </div>
+    
+        <div class="btn-center-holder">
+            <button type="button" class="action-btn" style="background-color:var(--accent-color); padding: 12px 35px; font-size:15px;" onclick="checkPigAssessment()">Complete and Score Exam</button>
+        </div>
+    </form>
+
+    <div id="summary-box">
+        <div id="summary-txt"></div>
+    </div>
+</div>
+
+<script>
+    const realAnswers = {q1: 'C', q2: 'D', q3: 'C', q4: 'B', q5: 'B', q6: 'A', q7: 'B', q8: 'B', q9: 'C', q10: 'B', q11: 'D', q12: 'D', q13: 'C', q14: 'B', q15: 'C', q16: 'A', q17: 'A', q18: 'D', q19: 'A', q20: 'A', q21: 'C', q22: 'B', q23: 'C', q24: 'C', q25: 'D', };
+
+    const rationales = {q1: 'As explicitly highlighted on Page 2, Apache Pig is a high-level platform for processing and analyzing large datasets that abstracts the complexity of writing raw MapReduce programs.', q2: 'Page 2 outlines that Apache Pig provides a dedicated data flow scripting language known specifically as Pig Latin.', q3: 'The explicit system diagram on Page 3 showcases the core layers underneath Pig as MapReduce/TEZ, managed via YARN, sitting directly over HDFS storage.', q4: 'Page 4 outlines simple scalar types which include Int, long, float, double, Chararray (UTF-8 strings), and Boolean, while Page 5 defines tuple, bag, and map as complex types.', q5: 'Page 5 explicitly defines a \'tuple\' as an ordered set of fields that is fundamentally similar to a row in a table.', q6: 'Page 5 defines a \'bag\' as an unordered collection of tuples and uses curly braces as its syntax example: {(19, 2), (18, 1)}.', q7: 'As explicitly shown in the table on Page 5, a \'map\' is defined as a set of key-value pairs with the corresponding visual example of using hash markers within brackets.', q8: 'Page 7 lists the \'LOAD\' command as the primitive relational operator responsible for importing data from file systems into Pig variables.', q9: 'Page 7 details that DUMP outputs results straight onto the terminal console display, while STORE writes data safely to file storage.', q10: 'Page 8 describes the \'FILTER\' operator as the relational tool used to extract specific rows from a data relation according to a boolean conditional check.', q11: 'Page 8 explicitly provides the syntax example: \'filter_data = FILTER student_details BY age > 20;\', emphasizing the requirement of the \'BY\' keyword.', q12: 'Page 9 details that the \'FOREACH\' operator is used to iterate through rows and generate distinct data columns using transformations.', q13: 'Page 10 presents the explicit sorting command syntax: \'sort_data = ORDER student_details BY age DESC;\'.', q14: 'Page 11 visually and textually details that grouping structures data into a \'group\' key column coupled with a nested collection bag of associated records.', q15: 'According to the evaluation operator definitions on Page 12, the \'DESCRIBE\' keyword is explicitly used to view the schema definition layout of a relation.', q16: 'Page 12 defines \'ILLUSTRATE\' as the operator that steps through sample data transformations, and Pages 13–14 showcase its detailed step-by-step validation trace capability.', q17: 'Page 12 notes that the \'EXPLAIN\' statement is leveraged explicitly to view the logical, physical, and MapReduce execution strategies generated for a relation.', q18: 'Page 15 highlights that \'COGROUP\' functions on multiple relations, clustering matching tuples into structured bags based on common key attributes.', q19: 'Page 16 demonstrates that the \'JOIN\' operator combines records from two or more distinct tables by matching shared key fields.', q20: 'Page 17 explicitly defines the \'CROSS\' operator as the relational tool used to compute the full Cartesian product of two or more relations.', q21: 'Page 18 notes that \'UNION\' is utilized to merge the contents of two or more relations vertically into a single unified output relation.', q22: 'Page 19 defines the \'SPLIT\' operator as the tool used to partition the contents of a single relation into two or more independent relations based on specified conditions.', q23: 'According to the tool usage guidelines on Page 20 and the challenge question on Page 24, the \'DISTINCT\' operator removes duplicate rows from a targeted relation.', q24: 'Page 21 details that the \'LIMIT\' operator is applied specifically to bound the number of output tuples from a relation to a designated integer threshold.', q25: 'Page 22 establishes that Tez can optimize performance because it orchestrates tasks as a complex Directed Acyclic Graph (DAG), allowing data processing flows to run much faster.', };
+
+    function toggleHint(id) {
+        const p = document.getElementById('hint-' + id);
+        p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function checkPigAssessment() {
+        let accurateCount = 0;
+        const itemsTotal = Object.keys(realAnswers).length;
+        
+        for (let key in realAnswers) {
+            const panel = document.getElementById('result-' + key);
+            const choice = document.querySelector(`input[name="${key}"]:checked`);
+            
+            if (choice) {
+                if (choice.value === realAnswers[key]) {
+                    accurateCount++;
+                    panel.className = "result-panel ok";
+                    panel.innerHTML = "<strong>Correct!</strong> " + rationales[key];
+                } else {
+                    panel.className = "result-panel err";
+                    panel.innerHTML = "<strong>Incorrect. The right option is " + realAnswers[key] + ".</strong> " + rationales[key];
+                }
+            } else {
+                panel.className = "result-panel err";
+                panel.innerHTML = "<strong>Not Answered. The right option is " + realAnswers[key] + ".</strong> " + rationales[key];
+            }
+        }
+
+        const box = document.getElementById('summary-box');
+        const txt = document.getElementById('summary-txt');
+        const percentage = Math.round((accurateCount / itemsTotal) * 100);
+        
+        txt.innerHTML = "Your Performance: " + accurateCount + " / " + itemsTotal + " Questions Answered Correctly (" + percentage + "%)";
+        box.style.display = "block";
+        
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
